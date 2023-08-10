@@ -1,9 +1,9 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMotor : MonoBehaviour
-{   
+{
     private PlayerStates[] _playerStates;
 
     private void Start()
@@ -19,8 +19,13 @@ public class PlayerMotor : MonoBehaviour
             {
                 state.LocalInput();
                 state.ExecuteState();
+                state.SetAnimation();
             }
         }
     }
-}
 
+    public void SpawnPlayer(Transform newPosition)
+    {
+        transform.position = newPosition.position;
+    }
+}

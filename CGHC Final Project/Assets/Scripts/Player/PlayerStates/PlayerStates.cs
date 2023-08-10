@@ -1,10 +1,11 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerStates : MonoBehaviour
 {
-    protected PlayerController _playerController;
+	protected PlayerController _playerController;
+    protected Animator _animator;
     protected float _horizontalInput;
     protected float _verticalInput;
 
@@ -16,7 +17,8 @@ public class PlayerStates : MonoBehaviour
     // Here we call some logic we need in start
     protected virtual void InitState()
     {
-        _playerController = GetComponent<PlayerController>();        
+        _playerController = GetComponent<PlayerController>();
+        _animator = GetComponent<Animator>();        
     }
 
     // Override in order to create the state logic
@@ -27,7 +29,8 @@ public class PlayerStates : MonoBehaviour
 
     // Gets the normal Input   
     public virtual void LocalInput()
-    {         
+    { 
+        
         _horizontalInput = Input.GetAxisRaw("Horizontal");
         _verticalInput = Input.GetAxisRaw("Vertical");
         
@@ -38,6 +41,10 @@ public class PlayerStates : MonoBehaviour
     protected virtual void GetInput()
     {
         
-    }
 }
 
+    public virtual void SetAnimation()
+    {
+         
+    }
+}

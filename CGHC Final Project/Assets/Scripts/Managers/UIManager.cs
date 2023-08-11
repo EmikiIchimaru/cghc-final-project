@@ -1,26 +1,21 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class UIManager : Singleton<UIManager>
 {
-    [Header("Settings")] 
+    /* [Header("Settings")] 
     [SerializeField] private Image fuelImage;  
     [SerializeField] private GameObject[] playerLifes;	
-
-    [Header("Coins")] 
-    [SerializeField] private TextMeshProUGUI coinTMP;
     
     private float _currentJetpackFuel;
     private float _jetpackFuel;
     
     private void Update()
     {
-        InternalJetpackUpdate();  
-        UpdateCoins();          
+        InternalJetpackUpdate();            
     }
 
     // Gets the fuel values
@@ -35,12 +30,6 @@ public class UIManager : Singleton<UIManager>
     {
         fuelImage.fillAmount =
             Mathf.Lerp(fuelImage.fillAmount, _currentJetpackFuel / _jetpackFuel, Time.deltaTime * 10f);
-    }
-
-    // Updates the coins
-    private void UpdateCoins()
-    {
-        coinTMP.text = CoinManager.Instance.TotalCoins.ToString();
     }
 
     // Updates the player lifes
@@ -67,5 +56,5 @@ public class UIManager : Singleton<UIManager>
     private void OnDisable()
     {
         Health.OnLifesChanged -= OnPlayerLifes;
-    }   
+    }    */
 }

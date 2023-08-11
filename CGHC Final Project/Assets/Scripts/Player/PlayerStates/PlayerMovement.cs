@@ -7,20 +7,16 @@ public class PlayerMovement : PlayerStates
     [Header("Settings")] 
     [SerializeField] private float speed = 10f;
 
-    public float Speed { get; set; }
-    public float InitialSpeed => speed;
-
     private float _horizontalMovement;
-    private float _movement;
+	private float _movement;
 
     private int _idleAnimatorParameter = Animator.StringToHash("Idle");
     private int _runAnimatorParameter = Animator.StringToHash("Run");
 
     protected override void InitState()
     {
-        base.InitState();
-        Speed = speed;
-    } 
+        base.InitState();        
+    }
 
     public override void ExecuteState()
     {
@@ -39,11 +35,11 @@ public class PlayerMovement : PlayerStates
             _movement = 0f;
         }
 
-        float moveSpeed = _movement * Speed;     
+        float moveSpeed = _movement * speed;     
         moveSpeed = EvaluateFriction(moveSpeed);
   
         _playerController.SetHorizontalForce(moveSpeed);
-	    }
+	}
 
     // Initialize our internal movement direction   
     protected override void GetInput()
@@ -54,7 +50,7 @@ public class PlayerMovement : PlayerStates
     public override void SetAnimation()
     {
         _animator.SetBool(_idleAnimatorParameter, _horizontalMovement == 0 && _playerController.Conditions.IsCollidingBelow);
-        _animator.SetBool(_runAnimatorParameter, Mathf.Abs(_horizontalInput) > 0.1f && 				 	 				_playerController.Conditions.IsCollidingBelow);
+        _animator.SetBool(_runAnimatorParameter, Mathf.Abs(_horizontalInput) > 0.1f && _playerController.Conditions.IsCollidingBelow);
     }
 
     private float EvaluateFriction(float moveSpeed)

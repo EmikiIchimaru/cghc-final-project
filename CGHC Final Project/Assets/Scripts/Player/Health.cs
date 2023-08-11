@@ -11,10 +11,6 @@ public class Health : MonoBehaviour
 
     [Header("Settings")] 
     [SerializeField] private int lifes = 3;
-
-    public int MaxLifes => _maxLifes;
-    
-    public int CurrentLifes => _currentLifes;
     
     private int _maxLifes;
     private int _currentLifes;

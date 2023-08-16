@@ -86,6 +86,7 @@ public class PlayerController : MonoBehaviour
         CollisionAbove();
 
         transform.Translate(_movePosition, Space.Self);
+        //Debug.Log(_movePosition.ToString());
 
         SetRayOrigins();
         CalculateMovement();

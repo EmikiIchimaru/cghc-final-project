@@ -41,7 +41,7 @@ public class PlayerStates : MonoBehaviour
     protected virtual void GetInput()
     {
         
-}
+    }   
 
     public virtual void SetAnimation()
     {

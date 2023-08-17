@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour
     public bool FacingRight { get; set; }
 
     // Return the Gravity value
-	    public float Gravity => gravity;
+	public float Gravity => gravity;
 
     // Return the Force applied 
     public Vector2 Force => _force;
@@ -294,16 +294,23 @@ public class PlayerController : MonoBehaviour
     public void SetHorizontalForce(float xForce)
     {
         _force.x = xForce;
+        //Debug.Log("force x = " + xForce.ToString());
     }
 
     public void SetVerticalForce(float yForce)
     {
         _force.y = yForce;
+        //Debug.Log("force y = " + yForce.ToString());
     } 
 
     public void AddHorizontalMovement(float xForce)
     {
         _force.x += xForce;
+    }	
+
+    public void AddVerticalMovement(float yForce)
+    {
+        _force.y += yForce;
     }	
 
     // Calculate the gravity to apply

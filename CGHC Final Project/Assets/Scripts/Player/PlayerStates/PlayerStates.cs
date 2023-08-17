@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerStates : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class PlayerStates : MonoBehaviour
     protected Animator _animator;
     protected float _horizontalInput;
     protected float _verticalInput;
+    protected SpriteRenderer sr;
 
     protected virtual void Start()
     {
@@ -18,7 +20,8 @@ public class PlayerStates : MonoBehaviour
     protected virtual void InitState()
     {
         _playerController = GetComponent<PlayerController>();
-        _animator = GetComponent<Animator>();        
+        _animator = GetComponent<Animator>();   
+        sr = GetComponent<SpriteRenderer>();     
     }
 
     // Override in order to create the state logic

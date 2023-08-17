@@ -12,16 +12,20 @@ public class PlayerDash : PlayerStates
     
     [SerializeField] private float dashCooldown;
 
+    [Header("Unity Stuff")]
+
     [SerializeField] private Camera mainCamera;
     // return if player can dash
-    public bool canDash = true;
+    public bool canDash { get; private set; }
     public bool isDashing { get; private set; }
     
     private Vector2 dashDirection;
 
+
     protected override void InitState()
     {
         base.InitState();
+        canDash = true;
     }
 
     public override void ExecuteState()
@@ -85,7 +89,7 @@ public class PlayerDash : PlayerStates
 
     private void SetDashColour(bool newState)
     {
-        sr.color = (newState) ? Color.white : Color.blue;
+        sr.color = (newState) ? Color.white : Color.gray;
     }
 
     //unused cooldown

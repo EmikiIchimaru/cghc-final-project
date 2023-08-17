@@ -10,7 +10,7 @@ public class PlayerDash : PlayerStates
     [SerializeField] private float dashDuration;
     [SerializeField] private float fixedDashX;
     
-    [SerializeField] private float dashCooldown;
+    private float dashCooldown = 1f;
 
     [Header("Unity Stuff")]
 
@@ -18,6 +18,7 @@ public class PlayerDash : PlayerStates
     // return if player can dash
     public bool canDash { get; private set; }
     public bool isDashing { get; private set; }
+    public bool isDashCD { get; private set; }
     
     private Vector2 dashDirection;
 
@@ -26,6 +27,7 @@ public class PlayerDash : PlayerStates
     {
         base.InitState();
         canDash = true;
+        isDashCD = false;
     }
 
     public override void ExecuteState()
@@ -33,9 +35,10 @@ public class PlayerDash : PlayerStates
         if (_playerController.Conditions.IsCollidingBelow && _playerController.Force.y == 0f)
         {
             canDash = true;
-            SetDashColour(true);
+            
             //_playerController.Conditions.IsJumping = false;
         }
+        if (canDash && !isDashCD) { SetDashColour(true); } 
     }
 
     protected override void GetInput()
@@ -49,8 +52,10 @@ public class PlayerDash : PlayerStates
     private void Dash()
     {
         if (!canDash) { return; }
+        if (isDashCD) { return; }
 
         canDash = false;
+        isDashCD = true;
         SetDashColour(false);
 
         Vector3 cursorPosition = Input.mousePosition;
@@ -62,7 +67,7 @@ public class PlayerDash : PlayerStates
         Debug.Log(dashDirection.ToString());
 
         StartCoroutine(DashDuration());
-        //StartCoroutine(DashCooldown());
+        StartCoroutine(DashCooldown());
         
         //_playerController.Conditions.IsJumping = true;
     }
@@ -105,7 +110,7 @@ public class PlayerDash : PlayerStates
             yield return null;
         }
 
-        canDash = true;
+        isDashCD = false;
     }
 
     

@@ -17,7 +17,7 @@ public class PlayerWallCling : PlayerStates
 
     public override void ExecuteState()
     {
-        ExitWallCling();
+        CheckExitWallCling();
     }
 
     private void WallCling()
@@ -35,7 +35,42 @@ public class PlayerWallCling : PlayerStates
         }
     }
 
+    private void CheckExitWallCling()
+    {
+        if (!_playerController.Conditions.IsWallClinging) { return; }
+
+        if (_playerController.Conditions.IsCollidingBelow || _playerController.Force.y >= 0)
+        {
+            ExitWallCling();
+            return;
+        }
+
+        if (_playerController.MovePosition.x > 0.01f || _playerController.MovePosition.x < -0.01f )
+        {
+            ExitWallCling();
+            return;
+        }
+
+        if (_playerController.FacingRight && _horizontalInput < 0.01f)
+        {
+            ExitWallCling();  
+            return;
+        }
+
+        if (!_playerController.FacingRight && _horizontalInput > -0.01f)
+        {
+            ExitWallCling();
+            return;
+        }
+    }
+
     private void ExitWallCling()
+    {
+        _playerController.SetWallClingMultiplier(0f);
+        _playerController.Conditions.IsWallClinging = false;
+    }
+
+    /* private void ExitWallCling()
     {
         if (_playerController.Conditions.IsWallClinging)
         {
@@ -62,5 +97,5 @@ public class PlayerWallCling : PlayerStates
                 }
             }
         }
-    }
+    } */
 }   

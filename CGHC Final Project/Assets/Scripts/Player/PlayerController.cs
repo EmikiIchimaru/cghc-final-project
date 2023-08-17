@@ -22,6 +22,8 @@ public class PlayerController : MonoBehaviour
     // Return the Force applied 
     public Vector2 Force => _force;
 
+    public Vector2 MovePosition => _movePosition;
+
     // Return the conditions
     public PlayerConditions Conditions => _conditions;
 
@@ -49,7 +51,7 @@ public class PlayerController : MonoBehaviour
     private float _skin = 0.05f;
 
     private float _internalFaceDirection = 1f;
-	    private float _faceDirection;
+	private float _faceDirection;
 
     private float _wallFallMultiplier;
     

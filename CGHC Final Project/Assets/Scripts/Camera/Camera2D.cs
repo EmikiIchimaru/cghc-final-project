@@ -8,6 +8,7 @@ public class Camera2D : MonoBehaviour
     [SerializeField] private PlayerMotor playerToFollow;
     [SerializeField] private bool horizontalFollow = true;
     [SerializeField] private bool verticalFollow = true;
+    [SerializeField] private bool facingOffset = true;
 
     [Header("Horizontal")] 
     [SerializeField] [Range(0, 1)] private float horizontalInfluence = 1f;
@@ -28,9 +29,14 @@ public class Camera2D : MonoBehaviour
     private float _targetHorizontalSmoothFollow;
     private float _targetVerticalSmoothFollow;
 
+    private PlayerController pc;
+    private float facingX = 1f;
+
     private void Awake()
     {
-        CenterOnTarget(playerToFollow);    
+        CenterOnTarget(playerToFollow);   
+        pc = playerToFollow.GetComponent<PlayerController>(); 
+        //if (pc != null) { Debug.Log("oi sumthing");}
     }
 
     private void Update()
@@ -39,13 +45,19 @@ public class Camera2D : MonoBehaviour
         {
             CenterOnTarget(playerToFollow);
         }*/
+        //get facing (ben)
+        if (facingOffset)
+        {
+            facingX = (pc.FacingRight) ? 1f : -0.5f;
+            Debug.Log(facingX.ToString());
+        }
 
         MoveCamera();
     }
 
     // Moves our Camera
     private void MoveCamera()
-    {        
+    {       
         // Calculate Position
         TargetPosition = GetTargetPosition(playerToFollow);
         CameraTargetPosition = new Vector3(TargetPosition.x, TargetPosition.y, 0f);
@@ -54,8 +66,10 @@ public class Camera2D : MonoBehaviour
         float xPos = horizontalFollow ? CameraTargetPosition.x : transform.localPosition.x;
         float yPos = verticalFollow ? CameraTargetPosition.y : transform.localPosition.y;
         
+        
+    
         // Set offset
-        CameraTargetPosition += new Vector3(horizontalFollow ? horizontalOffset : 0f, verticalFollow ? verticalOffset : 0f, 0f);
+        CameraTargetPosition += new Vector3(horizontalFollow ? horizontalOffset * facingX : 0f, verticalFollow ? verticalOffset : 0f, 0f);
         
         // Set smooth value
         _targetHorizontalSmoothFollow = Mathf.Lerp(_targetHorizontalSmoothFollow, CameraTargetPosition.x,
@@ -81,7 +95,7 @@ public class Camera2D : MonoBehaviour
         float xPos = 0f;
         float yPos = 0f;
 
-        xPos += (player.transform.position.x + horizontalOffset) * horizontalInfluence;
+        xPos += (player.transform.position.x + horizontalOffset * facingX) * horizontalInfluence;
         yPos += (player.transform.position.y + verticalOffset) * verticalInfluence;
         
         Vector3 positionTarget = new Vector3(xPos, yPos, transform.position.z);

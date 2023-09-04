@@ -49,7 +49,7 @@ public class Camera2D : MonoBehaviour
         if (facingOffset)
         {
             facingX = (pc.FacingRight) ? 1f : -0.5f;
-            Debug.Log(facingX.ToString());
+            //Debug.Log(facingX.ToString());
         }
 
         MoveCamera();

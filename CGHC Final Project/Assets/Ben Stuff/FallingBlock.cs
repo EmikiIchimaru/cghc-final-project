@@ -41,7 +41,7 @@ public class FallingBlock : MonoBehaviour
             {
                 hasChangedGravity = true;
                 Debug.Log("Falling!");
-                rb.gravityScale = 1.5f;
+                rb.gravityScale = 3f;
             }
             yield return null;
         }

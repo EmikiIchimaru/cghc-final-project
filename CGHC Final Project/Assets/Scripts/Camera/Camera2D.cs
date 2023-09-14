@@ -4,11 +4,9 @@ using UnityEngine;
 
 public class Camera2D : MonoBehaviour
 {
-[Header("Horizontal")] 
-    [SerializeField] private PlayerMotor playerToFollow;
+    [Header("Horizontal")]     
     [SerializeField] private bool horizontalFollow = true;
     [SerializeField] private bool verticalFollow = true;
-    [SerializeField] private bool facingOffset = true;
 
     [Header("Horizontal")] 
     [SerializeField] [Range(0, 1)] private float horizontalInfluence = 1f;
@@ -20,6 +18,9 @@ public class Camera2D : MonoBehaviour
     [SerializeField] private float verticalOffset = 0f;
     [SerializeField] private float verticalSmoothness = 3f;
 
+    // The target reference    
+    public PlayerMotor Target { get; set; }
+
     // Position of the Target  
     public Vector3 TargetPosition { get; set; }    
    
@@ -29,47 +30,30 @@ public class Camera2D : MonoBehaviour
     private float _targetHorizontalSmoothFollow;
     private float _targetVerticalSmoothFollow;
 
-    private PlayerController pc;
-    private float facingX = 1f;
-
-    private void Awake()
-    {
-        CenterOnTarget(playerToFollow);   
-        pc = playerToFollow.GetComponent<PlayerController>(); 
-        //if (pc != null) { Debug.Log("oi sumthing");}
-    }
-
     private void Update()
     {
-        /*if (Input.GetKeyDown(KeyCode.U))   //We remove these because we don’t need to provide input anymore
-        {
-            CenterOnTarget(playerToFollow);
-        }*/
-        //get facing (ben)
-        if (facingOffset)
-        {
-            facingX = (pc.FacingRight) ? 1f : -0.5f;
-            //Debug.Log(facingX.ToString());
-        }
-
         MoveCamera();
     }
 
     // Moves our Camera
     private void MoveCamera()
-    {       
+    { 
+        if (Target == null)
+        {
+            return;
+        }
+       
         // Calculate Position
-        TargetPosition = GetTargetPosition(playerToFollow);
+        //TargetPosition = GetTargetPosition(playerToFollow);
+        TargetPosition = GetTargetPosition(Target);
         CameraTargetPosition = new Vector3(TargetPosition.x, TargetPosition.y, 0f);
         
         // Follow on selected axis
         float xPos = horizontalFollow ? CameraTargetPosition.x : transform.localPosition.x;
         float yPos = verticalFollow ? CameraTargetPosition.y : transform.localPosition.y;
         
-        
-    
         // Set offset
-        CameraTargetPosition += new Vector3(horizontalFollow ? horizontalOffset * facingX : 0f, verticalFollow ? verticalOffset : 0f, 0f);
+        CameraTargetPosition += new Vector3(horizontalFollow ? horizontalOffset : 0f, verticalFollow ? verticalOffset : 0f, 0f);
         
         // Set smooth value
         _targetHorizontalSmoothFollow = Mathf.Lerp(_targetHorizontalSmoothFollow, CameraTargetPosition.x,
@@ -95,7 +79,7 @@ public class Camera2D : MonoBehaviour
         float xPos = 0f;
         float yPos = 0f;
 
-        xPos += (player.transform.position.x + horizontalOffset * facingX) * horizontalInfluence;
+        xPos += (player.transform.position.x + horizontalOffset) * horizontalInfluence;
         yPos += (player.transform.position.y + verticalOffset) * verticalInfluence;
         
         Vector3 positionTarget = new Vector3(xPos, yPos, transform.position.z);
@@ -105,11 +89,27 @@ public class Camera2D : MonoBehaviour
     // Centers our camera in the target position
     private void CenterOnTarget(PlayerMotor player)
     {
-        Vector3 targetPosition = GetTargetPosition(player);   
-        _targetHorizontalSmoothFollow = targetPosition.x;
-        _targetVerticalSmoothFollow = targetPosition.y;
+        //Vector3 targetPosition = GetTargetPosition(player);
+        Target = player;
+
+        Vector3 targetPos = GetTargetPosition(Target);   
+        _targetHorizontalSmoothFollow = targetPos.x;
+        _targetVerticalSmoothFollow = targetPos.y;
      
-        transform.localPosition = targetPosition;
+        transform.localPosition = targetPos;
+    }
+
+    // Reset the target reference
+    private void StopFollow(PlayerMotor player)
+    {
+        Target = null;
+    }
+
+    // Gets Target reference and center our camera
+    private void StartFollowing(PlayerMotor player)
+    {
+        Target = player;
+        CenterOnTarget(Target);
     }
 
     private void OnDrawGizmos()
@@ -119,4 +119,17 @@ public class Camera2D : MonoBehaviour
         Gizmos.DrawWireSphere(camPosition, 0.5f);
     }
 
+    private void OnEnable()
+    {
+        LevelManager.OnPlayerSpawn += CenterOnTarget;
+        Health.OnDeath += StopFollow;
+        Health.OnRevive += StartFollowing;
+    }
+
+    private void OnDisable()
+    {
+        LevelManager.OnPlayerSpawn -= CenterOnTarget;
+        Health.OnDeath -= StopFollow;
+        Health.OnRevive -= StartFollowing;
+    }
 }

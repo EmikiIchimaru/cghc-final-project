@@ -30,6 +30,14 @@ public class Camera2D : MonoBehaviour
     private float _targetHorizontalSmoothFollow;
     private float _targetVerticalSmoothFollow;
 
+    
+
+    private void Start()
+    {
+        PlayerMotor targetPlayer = GameObject.Find("Rohith Player").GetComponent<PlayerMotor>();
+        StartFollowing(targetPlayer);
+    }
+
     private void Update()
     {
         MoveCamera();

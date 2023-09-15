@@ -15,17 +15,17 @@ public class FallingBlock : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.GetComponent<PlayerController>() != null)
+        PlayerController pc = other.gameObject.GetComponent<PlayerController>();
+        if (!pc) { return; }
+        if (!pc.Conditions.IsCollidingBelow) { return; }
+           
+        if (!isFallDelay)
         {
-            
-            if (!isFallDelay)
-            {
-                isFallDelay = true;
-                Debug.Log("Test");
-                StartCoroutine(FallTimer());
-            }
-            
+            isFallDelay = true;
+            Debug.Log("Test");
+            StartCoroutine(FallTimer());
         }
+    
     }
 
     private IEnumerator FallTimer()

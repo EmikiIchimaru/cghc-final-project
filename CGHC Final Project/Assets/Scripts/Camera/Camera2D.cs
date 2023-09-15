@@ -30,13 +30,15 @@ public class Camera2D : MonoBehaviour
     private float _targetHorizontalSmoothFollow;
     private float _targetVerticalSmoothFollow;
 
-    
+    // added by ben for temporary idk why camera not working
+    public PlayerMotor tempPlayer;
 
     private void Start()
     {
-        PlayerMotor targetPlayer = GameObject.Find("Rohith Player").GetComponent<PlayerMotor>();
-        StartFollowing(targetPlayer);
+        Target = tempPlayer;
     }
+    
+    //end ben part
 
     private void Update()
     {

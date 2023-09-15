@@ -78,4 +78,13 @@ public class Health : MonoBehaviour
     {
         OnLifesChanged?.Invoke(_currentLifes);
     }    
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.GetComponent<IDamageable>() != null)
+        {
+            other.GetComponent<IDamageable>().Damage(gameObject.GetComponent<PlayerMotor>());            
+        }
+    }   
+
 }

@@ -44,6 +44,13 @@ public class Health : MonoBehaviour
         UpdateLifesUI();
     }
 
+    public void KillPlayer()
+    {
+        _currentLifes = 0;
+        OnDeath?.Invoke(gameObject.GetComponent<PlayerMotor>());    
+        UpdateLifesUI();  
+    }
+    
     public void LoseLife()
     {
         _currentLifes -= 1;

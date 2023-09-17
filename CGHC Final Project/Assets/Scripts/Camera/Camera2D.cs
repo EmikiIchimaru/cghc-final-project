@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Camera2D : MonoBehaviour
 {
-    [Header("Horizontal")]     
+    [Header("Horizontal")]
+	[SerializeField] private PlayerMotor playerToFollow;    	
     [SerializeField] private bool horizontalFollow = true;
     [SerializeField] private bool verticalFollow = true;
 
@@ -44,6 +45,7 @@ public class Camera2D : MonoBehaviour
     {
         MoveCamera();
     }
+	
 
     // Moves our Camera
     private void MoveCamera()
@@ -52,12 +54,26 @@ public class Camera2D : MonoBehaviour
         {
             return;
         }
+		
+		if (Target.transform.position.x > -50 
+            && Target.transform.position.x < 0 
+            && Target.transform.position.y > -5
+            && Target.transform.position.y < 10 )
+        {
+            horizontalInfluence = 0.5f;
+            verticalInfluence = 0.2f; 
+        }
+        else
+        {
+            horizontalInfluence = 1f;
+            verticalInfluence = 1f;
+        }
        
         // Calculate Position
-        //TargetPosition = GetTargetPosition(playerToFollow);
+        TargetPosition = GetTargetPosition(playerToFollow);
         TargetPosition = GetTargetPosition(Target);
         CameraTargetPosition = new Vector3(TargetPosition.x, TargetPosition.y, 0f);
-        
+       
         // Follow on selected axis
         float xPos = horizontalFollow ? CameraTargetPosition.x : transform.localPosition.x;
         float yPos = verticalFollow ? CameraTargetPosition.y : transform.localPosition.y;
@@ -99,7 +115,7 @@ public class Camera2D : MonoBehaviour
     // Centers our camera in the target position
     private void CenterOnTarget(PlayerMotor player)
     {
-        //Vector3 targetPosition = GetTargetPosition(player);
+        Vector3 targetPosition = GetTargetPosition(player);
         Target = player;
 
         Vector3 targetPos = GetTargetPosition(Target);   
@@ -132,14 +148,11 @@ public class Camera2D : MonoBehaviour
     private void OnEnable()
     {
         LevelManager.OnPlayerSpawn += CenterOnTarget;
-        Health.OnDeath += StopFollow;
-        Health.OnRevive += StartFollowing;
     }
 
     private void OnDisable()
     {
         LevelManager.OnPlayerSpawn -= CenterOnTarget;
-        Health.OnDeath -= StopFollow;
-        Health.OnRevive -= StartFollowing;
     }
 }
+

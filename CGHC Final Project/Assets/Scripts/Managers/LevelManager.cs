@@ -10,14 +10,12 @@ public class LevelManager : MonoBehaviour
     [Header("Settings")]
     [SerializeField] private Transform levelStartPoint; 
     [SerializeField] private GameObject playerPrefab;
-    [SerializeField] private GameObject deathFX;
 
     private PlayerMotor _currentPlayer;
 
-
     private void Awake()
     {        
-        //SpawnPlayer(playerPrefab);
+        SpawnPlayer(playerPrefab);
     }
 
     private void Update()
@@ -54,9 +52,7 @@ public class LevelManager : MonoBehaviour
 
     private void PlayerDeath(PlayerMotor player)
     {
-        _currentPlayer = player;
-        GameObject go = Instantiate(deathFX,_currentPlayer.transform.position, Quaternion.identity);
-        Destroy(go, 2f);
+        //_currentPlayer = player;
         _currentPlayer.gameObject.SetActive(false);
     }
 

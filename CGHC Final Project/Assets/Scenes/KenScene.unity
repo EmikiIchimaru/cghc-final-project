@@ -9519,7 +9519,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelStartPoint: {fileID: 0}
   playerPrefab: {fileID: 4336594351233565667, guid: 4ffbc13eb86be1d46b1cfb7afe42cdb4, type: 3}
-  deathFX: {fileID: 0}
 --- !u!4 &792047528
 Transform:
   m_ObjectHideFlags: 0
@@ -100404,7 +100403,7 @@ Transform:
   m_GameObject: {fileID: 1026519180}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -21.9, y: 8, z: -10}
+  m_LocalPosition: {x: 25.4, y: 6.5, z: -10}
   m_LocalScale: {x: 1, y: 1.5875, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

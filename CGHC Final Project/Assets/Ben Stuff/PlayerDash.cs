@@ -12,9 +12,9 @@ public class PlayerDash : PlayerStates
     
     private float dashCooldown = 1f;
 
-    [Header("Unity Stuff")]
+    //[Header("Unity Stuff")]
 
-    [SerializeField] private Camera mainCamera;
+    //private Camera Camera.main;
     // return if player can dash
     public bool canDash { get; private set; }
     public bool isDashing { get; private set; }
@@ -59,9 +59,9 @@ public class PlayerDash : PlayerStates
         SetDashColour(false);
 
         Vector3 cursorPosition = Input.mousePosition;
-        cursorPosition.z = -fixedDashX * mainCamera.transform.position.z;
+        cursorPosition.z = -fixedDashX * Camera.main.transform.position.z;
 
-        Vector3 worldCursorPos = mainCamera.ScreenToWorldPoint(cursorPosition);
+        Vector3 worldCursorPos = Camera.main.ScreenToWorldPoint(cursorPosition);
         dashDirection = (worldCursorPos - transform.position).normalized;
         Debug.Log((worldCursorPos - transform.position).ToString());
         Debug.Log(dashDirection.ToString());

@@ -5,7 +5,7 @@ using UnityEngine;
 public class Camera2D : MonoBehaviour
 {
     [Header("Horizontal")] 
-    [SerializeField] private PlayerMotor playerToFollow;    //DELETE it
+    //[SerializeField] private PlayerMotor playerToFollow;    //DELETE it
     [SerializeField] private bool horizontalFollow = true;
     [SerializeField] private bool verticalFollow = true;
 

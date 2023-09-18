@@ -1,4 +1,7 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {   
@@ -17,12 +20,10 @@ public class PlayerController : MonoBehaviour
     public bool FacingRight { get; set; }
 
     // Return the Gravity value
-	public float Gravity => gravity;
+	    public float Gravity => gravity;
 
     // Return the Force applied 
     public Vector2 Force => _force;
-
-    public Vector2 MovePosition => _movePosition;
 
     // Return the conditions
     public PlayerConditions Conditions => _conditions;
@@ -51,7 +52,7 @@ public class PlayerController : MonoBehaviour
     private float _skin = 0.05f;
 
     private float _internalFaceDirection = 1f;
-	private float _faceDirection;
+	    private float _faceDirection;
 
     private float _wallFallMultiplier;
     
@@ -88,7 +89,6 @@ public class PlayerController : MonoBehaviour
         CollisionAbove();
 
         transform.Translate(_movePosition, Space.Self);
-        //Debug.Log(_movePosition.ToString());
 
         SetRayOrigins();
         CalculateMovement();
@@ -251,7 +251,7 @@ public class PlayerController : MonoBehaviour
 
     #endregion
 	
-	#region Moving Platform
+	    #region Moving Platform
 
     private void EnterPlatformMovement()
     {
@@ -296,23 +296,16 @@ public class PlayerController : MonoBehaviour
     public void SetHorizontalForce(float xForce)
     {
         _force.x = xForce;
-        //Debug.Log("force x = " + xForce.ToString());
     }
 
     public void SetVerticalForce(float yForce)
     {
         _force.y = yForce;
-        //Debug.Log("force y = " + yForce.ToString());
     } 
 
     public void AddHorizontalMovement(float xForce)
     {
         _force.x += xForce;
-    }	
-
-    public void AddVerticalMovement(float yForce)
-    {
-        _force.y += yForce;
     }	
 
     // Calculate the gravity to apply

@@ -62,12 +62,7 @@ public class PlayerWallClimb : PlayerStates
             ExitWallCling();
             return;
         }
-
-        if (_playerController.MovePosition.x > 0.01f || _playerController.MovePosition.x < -0.01f )
-        {
-            ExitWallCling();
-            return;
-        }
+      
 
         if (_playerController.FacingRight && _horizontalInput < 0.01f)
         {

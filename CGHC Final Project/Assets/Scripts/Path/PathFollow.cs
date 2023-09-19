@@ -7,7 +7,7 @@ public class PathFollow : MonoBehaviour
 { 
     public enum MoveDirections
     {
-        LEFT, RIGHT
+        LEFT, RIGHT, UP, DOWN
     }
    
     [Header("Settings")] 
@@ -72,6 +72,15 @@ public class PathFollow : MonoBehaviour
             else if (transform.position.x < _previousPosition.x)
             {
                 Direction = MoveDirections.LEFT;
+            }
+
+			if (transform.position.y > _previousPosition.y)
+            {
+                Direction = MoveDirections.UP;
+            }
+            else if (transform.position.y < _previousPosition.y)
+            {
+                Direction = MoveDirections.DOWN;
             }
         }
         

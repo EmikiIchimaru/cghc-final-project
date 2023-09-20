@@ -96,8 +96,6 @@ public class PlayerDash : PlayerStates
     {
         sr.color = (newState) ? Color.white : Color.gray;
     }
-
-    //unused cooldown
     private IEnumerator DashCooldown()
     {
         float dashElapsedCD = 0f;
@@ -113,6 +111,11 @@ public class PlayerDash : PlayerStates
         isDashCD = false;
     }
 
+    //temp fix
+    private void OnEnable()
+    {
+        isDashCD = false;
+    }
     
 
 

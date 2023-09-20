@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 8946696860372814648}
   m_Layer: 0
   m_Name: PlayerBen
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -197,7 +197,6 @@ MonoBehaviour:
   dashSpeed: 50
   dashDuration: 0.4
   fixedDashX: 1
-  mainCamera: {fileID: 0}
 --- !u!95 &7371056749475985539
 Animator:
   serializedVersion: 5

@@ -8,6 +8,7 @@ public class PlayerWallClimb : PlayerStates
     [SerializeField] private float fallFactor = 0.5f;
     [SerializeField] private float speed = 10f;
     [SerializeField] private float maxStamina = 1.2f;
+    private float wallClingBuffer;
     public float stamina;
 
     private float _movement;
@@ -36,6 +37,11 @@ public class PlayerWallClimb : PlayerStates
             CheckExitWallCling();
             WallClimb();
         }
+
+        if (_playerController.Conditions.IsCollidingBelow)
+        {
+            ResetStamina();
+        }
         
     }
 
@@ -51,6 +57,7 @@ public class PlayerWallClimb : PlayerStates
         {
             _playerController.SetWallClingMultiplier(fallFactor);
             _playerController.Conditions.IsWallClinging = true;
+            wallClingBuffer = 1f;
         }
     }
 
@@ -80,7 +87,19 @@ public class PlayerWallClimb : PlayerStates
     private void ExitWallCling()
     {
         _playerController.SetWallClingMultiplier(0f);
-        _playerController.Conditions.IsWallClinging = false;
+    }
+
+    void Update()
+    {
+        if (wallClingBuffer > 0f)
+        {
+            wallClingBuffer -= Time.deltaTime;
+            if (wallClingBuffer <= 0f)
+            {
+                _playerController.Conditions.IsWallClinging = false;
+            }
+        }
+        
     }
 
     private void WallClimb()
@@ -93,7 +112,9 @@ public class PlayerWallClimb : PlayerStates
 
         _playerController.SetVerticalForce(_verticalInput * speed);
 
-        StartCoroutine(BurnStamina());
+        stamina -= Time.deltaTime;
+
+        //StartCoroutine(BurnStamina());
     }
     
     private IEnumerator BurnStamina()

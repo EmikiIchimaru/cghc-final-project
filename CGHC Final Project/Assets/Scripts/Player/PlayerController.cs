@@ -1,15 +1,16 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {   
     [Header("Settings")]
     [SerializeField] private float gravity = -20f;
-    [SerializeField] private float fallMultiplier = 1.5f;
 
     [Header("Collisions")] 
     [SerializeField] private LayerMask collideWith;
-    [SerializeField] private int verticalRayAmount = 4;
-    [SerializeField] private int horizontalRayAmount = 4;
+[SerializeField] private int verticalRayAmount = 4;
+[SerializeField] private int horizontalRayAmount = 4;
 
     #region Properties
 
@@ -17,15 +18,7 @@ public class PlayerController : MonoBehaviour
     public bool FacingRight { get; set; }
 
     // Return the Gravity value
-	    public float Gravity => gravity;
-
-    // Return the Force applied 
-    public Vector2 Force => _force;
-
-    // Return the conditions
-    public PlayerConditions Conditions => _conditions;
-
-    public float Friction { get; set; }
+    public float Gravity => gravity;
 
     #endregion
 
@@ -33,7 +26,6 @@ public class PlayerController : MonoBehaviour
     
     private BoxCollider2D _boxCollider2D;
     private PlayerConditions _conditions;
-    private MovingPlatform _movingPlatform;
 
     private Vector2 _boundsTopLeft;
     private Vector2 _boundsTopRight;
@@ -46,12 +38,10 @@ public class PlayerController : MonoBehaviour
     private float _currentGravity;
     private Vector2 _force;
     private Vector2 _movePosition;
-    private float _skin = 0.05f;
+private float _skin = 0.05f;
 
     private float _internalFaceDirection = 1f;
-	    private float _faceDirection;
-
-    private float _wallFallMultiplier;
+    private float _faceDirection;
     
     #endregion
 
@@ -68,10 +58,8 @@ public class PlayerController : MonoBehaviour
         ApplyGravity();
         StartMovement();
 
-        EnterPlatformMovement();
         SetRayOrigins();
         GetFaceDirection();
-        RotateModel();
 
         if (FacingRight)
         {
@@ -83,7 +71,6 @@ public class PlayerController : MonoBehaviour
         }
 
         CollisionBelow();
-        CollisionAbove();
 
         transform.Translate(_movePosition, Space.Self);
 
@@ -97,8 +84,6 @@ public class PlayerController : MonoBehaviour
 
     private void CollisionBelow()
     { 
-        Friction = 0f;
-
         if (_movePosition.y < -0.0001f)
         {
             _conditions.IsFalling = true;
@@ -136,8 +121,6 @@ public class PlayerController : MonoBehaviour
 
             if (hit)
             {
-                GameObject hitObject = hit.collider.gameObject;
-
                 if (_force.y > 0)
                 {
                     _movePosition.y = _force.y * Time.deltaTime;
@@ -155,23 +138,17 @@ public class PlayerController : MonoBehaviour
                 {
                     _movePosition.y = 0f;
                 }
-
-                if (hitObject.GetComponent<SpecialSurface>() != null)
-                {
-                    Friction = hitObject.GetComponent<SpecialSurface>().Friction;
-                }
-				
-                if (hitObject.GetComponent<MovingPlatform>() != null)
-                {
-                    _movingPlatform = hitObject.GetComponent<MovingPlatform>();
-                }
             }
+            //else              // We don’t need this because we will RESET it at
+            //{                 // StartMovement()
+                //_conditions.IsCollidingBelow = false;  
+            //}            
         }
     }
 
-    #endregion
+#endregion
 
-    #region Collision Horizontal
+#region Collision Horizontal
 
     private void HorizontalCollision(int direction)
     {
@@ -206,74 +183,13 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-	    #endregion
-
-    #region Collision Above
-
-    private void CollisionAbove()
-    {
-        if (_movePosition.y < 0)
-        {
-            return;
-        }
-
-        // Set rayLenght
-        float rayLenght = _movePosition.y + _boundsHeight / 2f;
-        
-        // Origin Points
-        Vector2 rayTopLeft = (_boundsBottomLeft + _boundsTopLeft) / 2f;
-        Vector2 rayTopRight = (_boundsBottomRight + _boundsTopRight) / 2f;
-        rayTopLeft += (Vector2) transform.right * _movePosition.x;
-        rayTopRight += (Vector2) transform.right * _movePosition.x;
-
-        for (int i = 0; i < verticalRayAmount; i++)
-        {
-            Vector2 rayOrigin = Vector2.Lerp(rayTopLeft, rayTopRight, (float) i / (float) (verticalRayAmount - 1));
-            RaycastHit2D hit = Physics2D.Raycast(rayOrigin, transform.up, rayLenght, collideWith);
-            Debug.DrawRay(rayOrigin, transform.up * rayLenght, Color.red);
-
-            if (hit)
-            {
-                _movePosition.y = hit.distance - _boundsHeight / 2f;
-                _conditions.IsCollidingAbove = true;
-            }
-            else
-            {
-                _conditions.IsCollidingAbove = false;
-            }
-        }
-    }
-
     #endregion
 
     #endregion
-	
-	    #region Moving Platform
 
-    private void EnterPlatformMovement()
-    {
-        if (_movingPlatform == null)
-        {
-            return;
-        }
+    #region Movement
 
-        if (_movingPlatform.CollidingWithPlayer)
-        {
-            if (_movingPlatform.MoveSpeed != 0)
-            {
-                Vector3 moveDirection = _movingPlatform.Direction == PathFollow.MoveDirections.RIGHT
-                    ? Vector3.right
-                    : Vector3.left;
-                transform.Translate(moveDirection * _movingPlatform.MoveSpeed * Time.deltaTime);
-            }
-        }
-    }
-	
-    #endregion    
-
-    #region Movement  
-
-    // Clamp our force applied 
+    // Clamp our force applied
     private void CalculateMovement()
     {
         if (Time.deltaTime > 0)
@@ -293,42 +209,22 @@ public class PlayerController : MonoBehaviour
     public void SetHorizontalForce(float xForce)
     {
         _force.x = xForce;
-    }
+}
 
     public void SetVerticalForce(float yForce)
     {
         _force.y = yForce;
-    } 
-
-    public void AddHorizontalMovement(float xForce)
-    {
-        _force.x += xForce;
-    }	
+    }   
 
     // Calculate the gravity to apply
     private void ApplyGravity()
     {
-        _currentGravity = gravity;
-
-        if (_force.y < 0)
-        {
-            _currentGravity *= fallMultiplier;
-        }        
+        _currentGravity = gravity;        
         
         _force.y += _currentGravity * Time.deltaTime;
-
-        if (_wallFallMultiplier != 0)
-        {
-            _force.y *= _wallFallMultiplier;
-        }
-	}
-
-    public void SetWallClingMultiplier(float fallM)
-    {
-        _wallFallMultiplier = fallM;
     }
 
-    #endregion
+#endregion
 
     #region Direction
     // Manage the direction we are facing
@@ -349,18 +245,6 @@ public class PlayerController : MonoBehaviour
         }
 
         _internalFaceDirection = _faceDirection;
-    }
-
-    private void RotateModel()
-    {
-        if (FacingRight)
-        {
-            transform.localScale = new Vector3(1,1,1);
-        }
-        else
-        {
-            transform.localScale = new Vector3(-1,1,1);
-        }
     }    
     
     #endregion
@@ -382,4 +266,4 @@ public class PlayerController : MonoBehaviour
     }
 
     #endregion
-}
+} 

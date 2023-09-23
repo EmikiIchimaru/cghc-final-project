@@ -6,11 +6,7 @@ public class PlayerJump : PlayerStates
 {
     [Header("Settings")]
     [SerializeField] private float jumpHeight = 5f;
-    [SerializeField] private int maxJumps = 2;
-
-    private int _jumpAnimatorParameter = Animator.StringToHash("Jump");
-    private int _doubleJumpParameter = Animator.StringToHash("DoubleJump");
-    private int _fallAnimatorParameter = Animator.StringToHash("Fall");
+[SerializeField] private int maxJumps = 2;
 
     // Return how many jumps we have left
     public int JumpsLeft { get; set; }
@@ -39,7 +35,7 @@ public class PlayerJump : PlayerStates
     }
 
     private void Jump()
-    {
+{
         if (!CanJump())
         {
             return;
@@ -54,8 +50,7 @@ public class PlayerJump : PlayerStates
         
         float jumpForce = Mathf.Sqrt(jumpHeight * 2f * Mathf.Abs(_playerController.Gravity));
         _playerController.SetVerticalForce(jumpForce);
-        _playerController.Conditions.IsJumping = true;
-    }
+}
 
     private bool CanJump()
     {
@@ -71,43 +66,4 @@ public class PlayerJump : PlayerStates
 
         return true;
     }
-
-    public override void SetAnimation()
-    {
-        // Jump
-        _animator.SetBool(_jumpAnimatorParameter, _playerController.Conditions.IsJumping 
-                                                  && !_playerController.Conditions.IsCollidingBelow
-                                                  && JumpsLeft > 0
-                                                  && !_playerController.Conditions.IsFalling
-                                                  && !_playerController.Conditions.IsJetpacking);
-        
-        // Double jump
-        _animator.SetBool(_doubleJumpParameter, _playerController.Conditions.IsJumping 
-                                                  && !_playerController.Conditions.IsCollidingBelow
-                                                  && JumpsLeft == 0
-                                                  && !_playerController.Conditions.IsFalling
-                                                  && !_playerController.Conditions.IsJetpacking);
-        
-        // Fall
-        _animator.SetBool(_fallAnimatorParameter, _playerController.Conditions.IsFalling 
-                                                  //&& _playerController.Conditions.IsJumping
-                                                  && !_playerController.Conditions.IsCollidingBelow
-                                                  && !_playerController.Conditions.IsJetpacking);
-    }
-
-    private void JumpResponse(float jump)
-    {
-        _playerController.SetVerticalForce(Mathf.Sqrt(2f * jump * Mathf.Abs(_playerController.Gravity)));
-    }
-    
-    private void OnEnable()
-    {
-        Jumper.OnJump += JumpResponse;
-    }
-
-    private void OnDisable()
-    {
-        Jumper.OnJump -= JumpResponse;
-    }
-
 }

@@ -9,8 +9,8 @@ public class PlayerController : MonoBehaviour
 
     [Header("Collisions")] 
     [SerializeField] private LayerMask collideWith;
-[SerializeField] private int verticalRayAmount = 4;
-[SerializeField] private int horizontalRayAmount = 4;
+    [SerializeField] private int verticalRayAmount = 4;
+    [SerializeField] private int horizontalRayAmount = 4;
 
     #region Properties
 
@@ -19,6 +19,9 @@ public class PlayerController : MonoBehaviour
 
     // Return the Gravity value
     public float Gravity => gravity;
+    public Vector2 Force => _force;
+    // Return the conditions
+    public PlayerConditions Conditions => _conditions;
 
     #endregion
 
@@ -26,6 +29,8 @@ public class PlayerController : MonoBehaviour
     
     private BoxCollider2D _boxCollider2D;
     private PlayerConditions _conditions;
+
+    public float Friction { get; set; }
 
     private Vector2 _boundsTopLeft;
     private Vector2 _boundsTopRight;
@@ -38,6 +43,8 @@ public class PlayerController : MonoBehaviour
     private float _currentGravity;
     private Vector2 _force;
     private Vector2 _movePosition;
+    private float _wallFallMultiplier;
+
 private float _skin = 0.05f;
 
     private float _internalFaceDirection = 1f;
@@ -216,6 +223,11 @@ private float _skin = 0.05f;
         _force.y = yForce;
     }   
 
+    public void AddHorizontalMovement(float xForce)
+    {
+        _force.x += xForce;
+    }	
+
     // Calculate the gravity to apply
     private void ApplyGravity()
     {
@@ -224,6 +236,10 @@ private float _skin = 0.05f;
         _force.y += _currentGravity * Time.deltaTime;
     }
 
+    public void SetWallClingMultiplier(float fallM)
+    {
+        _wallFallMultiplier = fallM;
+    }
 #endregion
 
     #region Direction

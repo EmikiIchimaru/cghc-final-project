@@ -24,6 +24,22 @@ public class PlayerController : MonoBehaviour
     public PlayerConditions Conditions => _conditions;
 
     #endregion
+	
+	private Vector3 respawnPoint; // The player's respawn point.
+
+    // Other player-related variables and functions...
+
+    public void SetSpawnPoint(Vector3 checkpointPosition)
+    {
+        // Set the player's respawn point to the provided checkpointPosition.
+        respawnPoint = checkpointPosition;
+    }
+
+    public void Respawn()
+    {
+        // Teleport the player to the respawn point.
+        transform.position = respawnPoint;
+    }
 
     #region Internal
     

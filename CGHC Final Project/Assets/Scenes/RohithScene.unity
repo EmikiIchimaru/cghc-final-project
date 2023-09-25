@@ -48081,7 +48081,7 @@ Transform:
   m_GameObject: {fileID: 891232691}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: 0.009563734, w: 0.9999543}
-  m_LocalPosition: {x: 0.09846319, y: 6.8648424, z: 0}
+  m_LocalPosition: {x: 17, y: 34.6, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -48099,6 +48099,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0890b67ad10e2c4289418b5bb7f58ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
   laserEnd: {fileID: 1654103106}
   duration: 2
   pauseDuration: 1
@@ -115596,6 +115597,7 @@ GameObject:
   - component: {fileID: 1981702999}
   - component: {fileID: 1981703001}
   - component: {fileID: 1981703002}
+  - component: {fileID: 1981703003}
   m_Layer: 0
   m_Name: Lazer Start Point
   m_TagString: Untagged
@@ -115734,6 +115736,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0890b67ad10e2c4289418b5bb7f58ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 1394070607586454009, guid: 55a18980ec327f7408dde1338aa45e77, type: 3}
   laserEnd: {fileID: 306069174}
   duration: 1
   pauseDuration: 1
@@ -115782,6 +115785,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.26834106, y: 22.199997}
   m_EdgeRadius: 0
+--- !u!114 &1981703003
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1981702998}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6dfba040c200c254ca499021410433de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1985032204
 MonoBehaviour:
   m_ObjectHideFlags: 0

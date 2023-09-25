@@ -6,15 +6,15 @@ using System.Collections.Generic;
 
 public class AnimatedLaserBeam : MonoBehaviour
 {
-
+    public GameObject player; // Reference to the player GameObject.
     public Transform laserEnd; // Reference to the end point of the laser beam
     public float duration = 2.0f; // Duration of the laser animation in seconds
     public float pauseDuration = 1.0f; // Duration to pause the laser beam in seconds
-
     private LineRenderer lineRenderer;
     private Vector3 startPosition;
     private void Start()
     {
+        player = GameObject.FindGameObjectWithTag("Player");
         lineRenderer = GetComponent<LineRenderer>();
         startPosition = transform.position;
         StartCoroutine(AnimateLaser());
@@ -47,16 +47,12 @@ public class AnimatedLaserBeam : MonoBehaviour
 
 
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        // Check if the colliding GameObject has the "Player" tag
-        if (collision.gameObject.CompareTag("Player"))
+        // Check if the entering collider is the player GameObject.
+        if (other.gameObject == player)
         {
-            // Write a debug message to the console
-            Debug.Log("Colliding");
+            player.GetComponent<Health>().KillPlayer();
         }
     }
 }
-
-    
-

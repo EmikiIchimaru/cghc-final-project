@@ -8,7 +8,7 @@ public class LevelManager : MonoBehaviour
     public static Action<PlayerMotor> OnPlayerSpawn;
     
     [Header("Settings")]
-    [SerializeField] private Transform levelStartPoint; 
+    public Transform levelStartPoint; 
     [SerializeField] private GameObject playerPrefab;
     [SerializeField] private GameObject deathFX;
 

@@ -21,12 +21,23 @@ public class FallingBlock : MonoBehaviour
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        basePosition = transform.position;
+        ResetBlock();
+    }
+
+    private void ResetBlock()
+    {
+        StopCoroutine(FallTimer());
+        StopCoroutine(SummonCoroutine());
+
         if (!isStartActive)
         {
             gameObject.SetActive(false);
         }
-        
-        basePosition = transform.position;
+
+        rb.gravityScale = 0f;
+        transform.position = basePosition;
+
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -86,7 +97,7 @@ public class FallingBlock : MonoBehaviour
     private IEnumerator SummonCoroutine()
     {
         float summonElapsed = 0f;
-        transform.position = transform.position + summonOffset;
+        transform.position = basePosition + summonOffset;
         
         while (summonElapsed <= summonDuration)
         {

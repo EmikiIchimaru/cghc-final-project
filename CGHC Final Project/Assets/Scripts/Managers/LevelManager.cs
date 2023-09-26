@@ -4,11 +4,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class LevelManager : MonoBehaviour
-{ 
+{   
     public static Action<PlayerMotor> OnPlayerSpawn;
-  
+    
     [Header("Settings")]
-    [SerializeField] private Transform levelStartPoint; 
+    public Transform levelStartPoint; 
     [SerializeField] private GameObject playerPrefab;
     [SerializeField] private GameObject deathFX;
 
@@ -30,13 +30,10 @@ public class LevelManager : MonoBehaviour
     // Spawns our player in the spawnPoint   
     private void SpawnPlayer(GameObject player)
     {
-        //Debug.Log("what?");
         if (player != null)
         {
             _currentPlayer = Instantiate(player, levelStartPoint.position, Quaternion.identity).GetComponent<PlayerMotor>();
             _currentPlayer.GetComponent<Health>().ResetLife();
-
-            // Call Event
             OnPlayerSpawn?.Invoke(_currentPlayer);
         }
     }
@@ -44,7 +41,6 @@ public class LevelManager : MonoBehaviour
     // Revives our player
     private void RevivePlayer()
     {
-        
         if (_currentPlayer != null)
         {
             _currentPlayer.gameObject.SetActive(true);

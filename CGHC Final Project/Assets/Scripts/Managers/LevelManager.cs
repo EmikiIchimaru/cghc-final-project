@@ -67,4 +67,9 @@ public class LevelManager : MonoBehaviour
     {
         Health.OnDeath -= PlayerDeath;
     }
+    public void UpdateSpawnPoint(Vector3 newSpawnPoint)
+    {
+        // Update the spawn point to the provided position
+        levelStartPoint.position = newSpawnPoint;
+    }
 }

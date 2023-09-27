@@ -25,7 +25,7 @@ public class FallingBlock : MonoBehaviour
         ResetBlock();
     }
 
-    private void ResetBlock()
+    public void ResetBlock()
     {
         StopCoroutine(FallTimer());
         StopCoroutine(SummonCoroutine());
@@ -90,6 +90,7 @@ public class FallingBlock : MonoBehaviour
             yield return null;
         }
         
+        isFallDelay = false;
         gameObject.SetActive(false);
               
     }
@@ -109,5 +110,6 @@ public class FallingBlock : MonoBehaviour
         }
 
         transform.position = basePosition;
+        isSummoning = false;
     }
 }

@@ -81,7 +81,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: -1914236138, guid: a70b3fff8c0d54e41b799a19a9a33a3f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -151,7 +151,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gravity: -25
-  fallMultiplier: 1.5
   collideWith:
     serializedVersion: 2
     m_Bits: 256
@@ -261,3 +260,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   jumpHeight: 5
   maxJumps: 1
+  coyoteTime: 0.5
+  jumpBuffer: 0.5

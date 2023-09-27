@@ -9,6 +9,7 @@ public class LevelManager : MonoBehaviour
     
     [Header("Settings")]
     public Transform levelStartPoint; 
+    public Area currentArea;
     [SerializeField] private GameObject playerPrefab;
     [SerializeField] private GameObject deathFX;
 
@@ -46,6 +47,11 @@ public class LevelManager : MonoBehaviour
             _currentPlayer.gameObject.SetActive(true);
             _currentPlayer.SpawnPlayer(levelStartPoint);
             _currentPlayer.GetComponent<Health>().ResetLife();            
+        }
+
+        if (currentArea != null)
+        {
+            currentArea.ResetArea();
         }
     }
 

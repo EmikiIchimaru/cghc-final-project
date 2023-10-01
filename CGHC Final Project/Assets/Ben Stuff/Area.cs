@@ -17,7 +17,7 @@ public class Area : MonoBehaviour
     {
         foreach (Button button in buttons)
         {
-            //button.ResetBlock();
+            button.ResetButton();
         }
 
         foreach (FallingBlock fb in fallingBlocks)

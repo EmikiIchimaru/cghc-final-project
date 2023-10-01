@@ -30,6 +30,7 @@ public class PlayerController : MonoBehaviour
     
     private BoxCollider2D _boxCollider2D;
     private PlayerConditions _conditions;
+    private MovingPlatform _movingPlatform;
 
     public float Friction { get; set; }
 
@@ -66,6 +67,7 @@ private float _skin = 0.05f;
         ApplyGravity();
         StartMovement();
 
+        EnterPlatformMovement();
         SetRayOrigins();
         GetFaceDirection();
 
@@ -241,7 +243,7 @@ private float _skin = 0.05f;
     {
         _wallFallMultiplier = fallM;
     }
-#endregion
+    #endregion
 
     #region Direction
     // Manage the direction we are facing
@@ -265,6 +267,29 @@ private float _skin = 0.05f;
     }    
     
     #endregion
+
+    #region Moving Platform
+
+    private void EnterPlatformMovement()
+    {
+        if (_movingPlatform == null)
+        {
+            return;
+        }
+
+        if (_movingPlatform.CollidingWithPlayer)
+        {
+            if (_movingPlatform.MoveSpeed != 0)
+            {
+                Vector3 moveDirection = _movingPlatform.Direction == PathFollow.MoveDirections.RIGHT
+                    ? Vector3.right
+                    : Vector3.left;
+                transform.Translate(moveDirection * _movingPlatform.MoveSpeed * Time.deltaTime);
+            }
+        }
+    }
+	
+    #endregion   
 
     #region Ray Origins
 

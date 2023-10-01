@@ -11,6 +11,12 @@ public class Button : MonoBehaviour
 
     public FallingBlock[] entryBlocks;
     public FallingBlock[] exitBlocks;
+
+    void Awake()
+    {
+        ResetButton();
+    }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         PlayerController pc = other.gameObject.GetComponent<PlayerController>();
@@ -18,21 +24,33 @@ public class Button : MonoBehaviour
         if (!pc.Conditions.IsCollidingBelow) { return; }
            
         ButtonUse();
-    
     }
     
     private void ButtonUse()
     {
-        if (entryBlocks.Length == 0) { return; }
-        foreach (FallingBlock block in entryBlocks)
+        if (!state) { return; }
+        
+        if (entryBlocks.Length > 0)
         {
-            block.Summon();
+            foreach (FallingBlock block in entryBlocks)
+            {
+                block.Summon();
+            }
         }
 
-        if (exitBlocks.Length == 0) { return; }
-        foreach (FallingBlock block in exitBlocks)
+        if (exitBlocks.Length > 0) 
         {
-            block.StartFall();
+            foreach (FallingBlock block in exitBlocks)
+            {
+                block.StartFall();
+            }
         }
+        
+        state = false;
+    }
+
+    public void ResetButton()
+    {
+        state = true;
     }
 }

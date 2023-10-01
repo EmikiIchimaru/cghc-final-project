@@ -104,7 +104,7 @@ public class PlayerWallClimb : PlayerStates
 
     private void WallClimb()
     {
-        Debug.Log(Mathf.Abs(_verticalInput).ToString());
+        //Debug.Log(Mathf.Abs(_verticalInput).ToString());
 
         if (Mathf.Abs(_verticalInput) < 0.1f) { return; }
 

@@ -47,7 +47,7 @@ public class PlayerController : MonoBehaviour
     private Vector2 _movePosition;
     private float _wallFallMultiplier;
 
-private float _skin = 0.05f;
+    private float _skin = 0.05f;
 
     private float _internalFaceDirection = 1f;
     private float _faceDirection;
@@ -131,6 +131,8 @@ private float _skin = 0.05f;
 
             if (hit)
             {
+                GameObject hitObject = hit.collider.gameObject;
+
                 if (_force.y > 0)
                 {
                     _movePosition.y = _force.y * Time.deltaTime;
@@ -147,6 +149,11 @@ private float _skin = 0.05f;
                 if (Mathf.Abs(_movePosition.y) < 0.0001f)
                 {
                     _movePosition.y = 0f;
+                }
+
+                if (hitObject.GetComponent<MovingPlatform>() != null)
+                {
+                    _movingPlatform = hitObject.GetComponent<MovingPlatform>();
                 }
             }
             //else              // We don’t need this because we will RESET it at
@@ -281,10 +288,12 @@ private float _skin = 0.05f;
         {
             if (_movingPlatform.MoveSpeed != 0)
             {
-                Vector3 moveDirection = _movingPlatform.Direction == PathFollow.MoveDirections.RIGHT
+                /* Vector3 moveDirection = _movingPlatform.Direction == PathFollow.MoveDirections.RIGHT
                     ? Vector3.right
                     : Vector3.left;
-                transform.Translate(moveDirection * _movingPlatform.MoveSpeed * Time.deltaTime);
+                transform.Translate(moveDirection * _movingPlatform.MoveSpeed * Time.deltaTime); */
+
+                transform.Translate(_movingPlatform.moveDirection * _movingPlatform.MoveSpeed * Time.deltaTime);
             }
         }
     }

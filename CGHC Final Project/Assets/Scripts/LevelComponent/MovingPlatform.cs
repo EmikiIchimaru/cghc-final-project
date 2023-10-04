@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class MovingPlatform : PathFollow
 {
-    public bool CollidingWithPlayer { get; set; }
+    public bool CollidingWithPlayer { get; set; }    
     
     private void OnTriggerEnter2D(Collider2D other)
     {

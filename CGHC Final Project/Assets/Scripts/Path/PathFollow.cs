@@ -26,6 +26,8 @@ public class PathFollow : MonoBehaviour
     private Vector3 _currentPosition;
     private Vector3 _previousPosition;
 
+    public Vector3 moveDirection { get { return MoveDirection(); } }
+
     private void Start()
     {
         _playing = true;
@@ -91,6 +93,13 @@ public class PathFollow : MonoBehaviour
         }
     }
     
+    public Vector3 MoveDirection()
+    {
+        Vector3 tempvec = points[_currentPoint] - _currentPosition;
+
+        return tempvec.normalized;
+    }
+
     private void OnDrawGizmos()
     {  
         if (transform.hasChanged && !_playing)

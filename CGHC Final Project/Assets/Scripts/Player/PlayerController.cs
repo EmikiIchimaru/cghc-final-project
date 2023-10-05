@@ -81,6 +81,7 @@ public class PlayerController : MonoBehaviour
         }
 
         CollisionBelow();
+        CollisionAbove();
 
         transform.Translate(_movePosition, Space.Self);
 
@@ -163,9 +164,9 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-#endregion
+    #endregion
 
-#region Collision Horizontal
+    #region Collision Horizontal
 
     private void HorizontalCollision(int direction)
     {
@@ -196,6 +197,44 @@ public class PlayerController : MonoBehaviour
                 }
 
                 _force.x = 0f;
+            }
+        }
+    }
+
+    #endregion
+
+    #region Collision Above
+
+    private void CollisionAbove()
+    {
+        if (_movePosition.y < 0)
+        {
+            return;
+        }
+
+        // Set rayLenght
+        float rayLenght = _movePosition.y + _boundsHeight / 2f;
+        
+        // Origin Points
+        Vector2 rayTopLeft = (_boundsBottomLeft + _boundsTopLeft) / 2f;
+        Vector2 rayTopRight = (_boundsBottomRight + _boundsTopRight) / 2f;
+        rayTopLeft += (Vector2) transform.right * _movePosition.x;
+        rayTopRight += (Vector2) transform.right * _movePosition.x;
+
+        for (int i = 0; i < verticalRayAmount; i++)
+        {
+            Vector2 rayOrigin = Vector2.Lerp(rayTopLeft, rayTopRight, (float) i / (float) (verticalRayAmount - 1));
+            RaycastHit2D hit = Physics2D.Raycast(rayOrigin, transform.up, rayLenght, collideWith);
+            Debug.DrawRay(rayOrigin, transform.up * rayLenght, Color.red);
+
+            if (hit)
+            {
+                _movePosition.y = hit.distance - _boundsHeight / 2f;
+                _conditions.IsCollidingAbove = true;
+            }
+            else
+            {
+                _conditions.IsCollidingAbove = false;
             }
         }
     }
@@ -294,6 +333,7 @@ public class PlayerController : MonoBehaviour
                 transform.Translate(moveDirection * _movingPlatform.MoveSpeed * Time.deltaTime); */
 
                 transform.Translate(_movingPlatform.moveDirection * _movingPlatform.MoveSpeed * Time.deltaTime);
+                Debug.Log((_movingPlatform.moveDirection * _movingPlatform.MoveSpeed).ToString());
             }
         }
     }

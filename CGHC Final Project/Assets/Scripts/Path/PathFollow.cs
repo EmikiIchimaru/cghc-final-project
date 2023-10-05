@@ -28,6 +28,8 @@ public class PathFollow : MonoBehaviour
 
     public Vector3 moveDirection { get { return MoveDirection(); } }
 
+    private Vector3 newpos;
+
     private void Start()
     {
         _playing = true;
@@ -52,9 +54,11 @@ public class PathFollow : MonoBehaviour
             _moved = true;
         } 
         
+        newpos = Vector3.MoveTowards(transform.position, _currentPosition + points[_currentPoint], Time.deltaTime * moveSpeed);
         // Move to next point
-        transform.position = Vector3.MoveTowards(transform.position, _currentPosition + points[_currentPoint], 
-                             Time.deltaTime * moveSpeed);
+        transform.position = newpos;
+        Debug.Log((moveDirection * moveSpeed).ToString());
+
         
         // Evaluate move to next point
         float distanceToNextPoint = Vector3.Distance(_currentPosition + points[_currentPoint], transform.position);
@@ -95,7 +99,7 @@ public class PathFollow : MonoBehaviour
     
     public Vector3 MoveDirection()
     {
-        Vector3 tempvec = points[_currentPoint] - _currentPosition;
+        Vector3 tempvec = newpos - _previousPosition;
 
         return tempvec.normalized;
     }

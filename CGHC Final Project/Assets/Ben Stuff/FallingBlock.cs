@@ -5,8 +5,10 @@ using UnityEngine;
 public class FallingBlock : MonoBehaviour
 {
     public bool isStartActive;
+    [SerializeField] private bool instantFall;
     [SerializeField] private bool fallOnContact;
     [SerializeField] private float fallDelay;
+   
     [SerializeField] private float summonDuration;
     [SerializeField] private Vector3 summonOffset = new Vector3(0f,-10f,0f);
 
@@ -23,6 +25,11 @@ public class FallingBlock : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         basePosition = transform.position;
         ResetBlock();
+    }
+
+    void Start()
+    { 
+        if (instantFall) { StartFall(); }
     }
 
     public void ResetBlock()

@@ -57,7 +57,7 @@ public class PathFollow : MonoBehaviour
         newpos = Vector3.MoveTowards(transform.position, _currentPosition + points[_currentPoint], Time.deltaTime * moveSpeed);
         // Move to next point
         transform.position = newpos;
-        Debug.Log((moveDirection * moveSpeed).ToString());
+        //Debug.Log((moveDirection * moveSpeed).ToString());
 
         
         // Evaluate move to next point

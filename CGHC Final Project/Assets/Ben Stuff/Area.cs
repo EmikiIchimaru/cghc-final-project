@@ -5,12 +5,12 @@ using UnityEngine;
 public class Area : MonoBehaviour
 {
     private Button[] buttons;
-    private FallingBlock[] fallingBlocks;
+    private Block[] blocks;
 
     void Awake()
     {
         buttons = GetComponentsInChildren<Button>();
-        fallingBlocks = GetComponentsInChildren<FallingBlock>(true);
+        blocks = GetComponentsInChildren<Block>(true);
     }
 
     public void ResetArea()
@@ -20,9 +20,9 @@ public class Area : MonoBehaviour
             button.ResetButton();
         }
 
-        foreach (FallingBlock fb in fallingBlocks)
+        foreach (Block block in blocks)
         {
-            fb.ResetBlock();
+            block.ResetBlock();
         }
     }
 

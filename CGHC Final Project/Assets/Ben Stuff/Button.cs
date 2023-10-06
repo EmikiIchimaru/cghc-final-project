@@ -9,9 +9,7 @@ public class Button : MonoBehaviour
     //public ButtonType buttonType;
     public bool state;
 
-    public FallingBlock[] entryBlocks;
-    public FallingBlock[] exitBlocks;
-
+    public Block[] blocks;
     void Awake()
     {
         ResetButton();
@@ -29,24 +27,33 @@ public class Button : MonoBehaviour
     private void ButtonUse()
     {
         if (!state) { return; }
-        
-        if (entryBlocks.Length > 0)
-        {
-            foreach (FallingBlock block in entryBlocks)
-            {
-                block.Summon();
-            }
-        }
 
-        if (exitBlocks.Length > 0) 
-        {
-            foreach (FallingBlock block in exitBlocks)
-            {
-                block.StartFall();
-            }
-        }
-        
         state = false;
+        
+        if (blocks.Length == 0) { return; }
+
+        foreach (Block block in blocks)
+        {
+            switch (block.buttonFunc)
+            {
+                case Block.ButtonFunc.Fall:
+                    block.StartFall();
+                    Debug.Log("fall");
+                    break;
+                case Block.ButtonFunc.Toggle:
+                    block.ToggleDoor();
+                    Debug.Log("tog");
+                    break;
+                case Block.ButtonFunc.Summon:
+                    block.Summon();
+                    Debug.Log("sum");
+                    break;
+            }      
+        }
+    
+
+        
+        
     }
 
     public void ResetButton()

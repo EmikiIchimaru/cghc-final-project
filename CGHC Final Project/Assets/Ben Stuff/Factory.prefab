@@ -45,6 +45,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 269674298564528999, guid: dd82568913c45f44189d9b6cafa2d182, type: 3}
-  loopDuration: 5
-  itemAmount: 15
-  itemInterval: 0.25
+  loopDuration: 6
+  itemAmount: 10
+  itemInterval: 0.5

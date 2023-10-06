@@ -30,8 +30,9 @@ public class Factory : MonoBehaviour
         if (timeCounter >= itemInterval * itemCounter)
         {
             itemCounter++;
-            Instantiate(item, transform.position, Quaternion.identity);
-            Debug.Log(itemCounter.ToString());
+            GameObject go = Instantiate(item, transform.position, Quaternion.identity);
+            Destroy(go, 3f);
+            //Debug.Log(itemCounter.ToString());
         }
     }
 }

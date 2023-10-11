@@ -46,7 +46,9 @@ public class LevelManager : MonoBehaviour
         {
             _currentPlayer.gameObject.SetActive(true);
             _currentPlayer.SpawnPlayer(levelStartPoint);
-            _currentPlayer.GetComponent<Health>().ResetLife();            
+            _currentPlayer.GetComponent<Health>().ResetLife(); 
+            _currentPlayer.GetComponent<PlayerController>().SetHorizontalForce(0f);
+            _currentPlayer.GetComponent<PlayerController>().SetVerticalForce(0f);          
         }
 
         if (currentArea != null)

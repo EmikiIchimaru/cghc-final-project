@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Area : MonoBehaviour
 {
+    public CheckpointBen checkpoint { get; private set; }
     private Button[] buttons;
     private Block[] blocks;
 
@@ -11,6 +12,7 @@ public class Area : MonoBehaviour
     {
         buttons = GetComponentsInChildren<Button>();
         blocks = GetComponentsInChildren<Block>(true);
+        checkpoint = GetComponentInChildren<CheckpointBen>();
     }
 
     public void ResetArea()

@@ -10,6 +10,8 @@ public class LevelManager : MonoBehaviour
     [Header("Settings")]
     public Transform levelStartPoint; 
     public Area currentArea;
+    public Area[] allAreas;
+    private int areaIndex = 0;
     [SerializeField] private GameObject playerPrefab;
     [SerializeField] private GameObject deathFX;
 
@@ -22,9 +24,25 @@ public class LevelManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R))
+        /* if (Input.GetKeyDown(KeyCode.R))
 	    {
             RevivePlayer();
+        } */
+        //in the event of physics bug, destroying the player and respawning solves the bug, but not reviving
+
+        if (Input.GetKeyDown(KeyCode.R))
+	    {
+            Destroy(_currentPlayer.gameObject);
+            SpawnPlayer(playerPrefab);
+        }
+
+        //press N to skip to next checkpoint
+        if (Input.GetKeyDown(KeyCode.N))
+	    {
+            areaIndex++;
+            levelStartPoint = allAreas[areaIndex].checkpoint.transform;
+            Destroy(_currentPlayer.gameObject);
+            SpawnPlayer(playerPrefab);
         }
     }
 

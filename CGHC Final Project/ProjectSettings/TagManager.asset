@@ -39,9 +39,12 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Background
+    uniqueID: 3409119669
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: LevelComponent
-    uniqueID: 3409119669
+  - name: Scene
+    uniqueID: 1654022033
     locked: 0

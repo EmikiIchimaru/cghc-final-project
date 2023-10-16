@@ -42,5 +42,6 @@ public class LaserShooter : MonoBehaviour
         Rigidbody2D laserRigidbody = laser.GetComponent<Rigidbody2D>();
         laserRigidbody.velocity = laser.transform.up * laserSpeed;
         timeSinceLastShot = Time.time;
+        
     }
 }

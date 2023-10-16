@@ -20,7 +20,10 @@ public class LaserShotCollisionHandler : MonoBehaviour
         // Check if the entering collider is the player GameObject.
         if (other.gameObject == player)
         {
+
+            Destroy(gameObject);
             player.GetComponent<Health>().KillPlayer();
+
         }
     }
 }

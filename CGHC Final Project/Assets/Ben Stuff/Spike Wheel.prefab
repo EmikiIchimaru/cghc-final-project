@@ -686,7 +686,7 @@ GameObject:
   - component: {fileID: 5188810844318692323}
   - component: {fileID: 1890776724945803674}
   - component: {fileID: 8999671217857900304}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Spike Wheel
   m_TagString: Untagged
   m_Icon: {fileID: 0}

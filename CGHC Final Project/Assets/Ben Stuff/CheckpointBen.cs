@@ -32,7 +32,8 @@ public class CheckpointBen : MonoBehaviour
 
         if (checkpointActivatedEffect != null)
         {
-            Instantiate(checkpointActivatedEffect, transform.position, Quaternion.identity);
+            GameObject vfx = Instantiate(checkpointActivatedEffect, transform.position, Quaternion.identity);
+            Destroy(vfx, 2f);
         }
 
         if (newArea != null)

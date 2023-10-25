@@ -8,6 +8,7 @@ public class Factory : MonoBehaviour
     [SerializeField] private float loopDuration;
     [SerializeField] private int itemAmount;
     [SerializeField] private float itemInterval;
+    [SerializeField] private float itemDuration = 3f;
     // Start is called before the first frame update
 
     private float timeCounter = 0f;
@@ -31,7 +32,7 @@ public class Factory : MonoBehaviour
         {
             itemCounter++;
             GameObject go = Instantiate(item, transform.position, Quaternion.identity);
-            Destroy(go, 3f);
+            Destroy(go, itemDuration);
             //Debug.Log(itemCounter.ToString());
         }
     }

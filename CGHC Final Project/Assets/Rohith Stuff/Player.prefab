@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 3224837699075655446}
   - component: {fileID: 7645494709304650684}
   - component: {fileID: 3244916746121269331}
+  - component: {fileID: 7148413591973753567}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -318,3 +319,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   jumpHeight: 5
   maxJumps: 2
+--- !u!114 &7148413591973753567
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1394070607586454009}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2978158c45e6ceb44bd53e6e29f0fe4b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100

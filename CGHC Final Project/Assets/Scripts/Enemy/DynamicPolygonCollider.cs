@@ -1,40 +1,43 @@
 using UnityEngine;
 
-[RequireComponent(typeof(SpriteRenderer))]
 [RequireComponent(typeof(PolygonCollider2D))]
 public class DynamicPolygonCollider : MonoBehaviour
 {
-    private SpriteRenderer spriteRenderer;
     private PolygonCollider2D polygonCollider;
+    private SpriteRenderer spriteRenderer;
 
     void Start()
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
         polygonCollider = GetComponent<PolygonCollider2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
 
-        // Call the function to update the collider initially and whenever the sprite changes
+        if (polygonCollider == null || spriteRenderer == null)
+        {
+            Debug.LogError("PolygonCollider2D or SpriteRenderer component not found!");
+            return;
+        }
+
         UpdatePolygonCollider();
     }
 
     void UpdatePolygonCollider()
     {
-        Vector2[] spriteVertices = spriteRenderer.sprite.vertices;
+        // Get the sprite's texture points in local space
+        Vector2[] spritePoints = spriteRenderer.sprite.vertices;
 
-        // Transform local sprite vertices to world space
-        for (int i = 0; i < spriteVertices.Length; i++)
+        // Convert sprite points to world space
+        for (int i = 0; i < spritePoints.Length; i++)
         {
-            spriteVertices[i] = transform.TransformPoint(spriteVertices[i]);
+            spritePoints[i] = transform.TransformPoint(spritePoints[i]);
         }
 
-        polygonCollider.SetPath(0, spriteVertices);
+        // Update the Polygon Collider points
+        polygonCollider.points = spritePoints;
     }
 
     void LateUpdate()
     {
-        // Check if the sprite has changed (width, height, etc.) and update the collider shape
-        if (spriteRenderer.sprite != null)
-        {
-            UpdatePolygonCollider();
-        }
+        // Call the update method in LateUpdate to ensure that the sprite and collider are in sync after any sprite changes
+        UpdatePolygonCollider();
     }
 }

@@ -5,7 +5,8 @@ using System.Collections.Generic;
 
 public class WizardEnemy : MonoBehaviour
 {
-    private GameObject player;
+    public Transform player;
+    public GameObject Player;
     public float detectionRange = 5f;
     public float attackDistance = 1.5f;
     public float moveSpeed = 2f;
@@ -22,6 +23,7 @@ public class WizardEnemy : MonoBehaviour
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        Player = GameObject.FindGameObjectWithTag("Player");
 
     }
 
@@ -93,18 +95,37 @@ public class WizardEnemy : MonoBehaviour
     // Called when the fire attack collides with something
     void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.gameObject == player)
+        if (other.gameObject == Player)
         {
             // Deal damage to the wizard
             PlayerHealthTest playerHealth = other.GetComponent<PlayerHealthTest>();
             if (playerHealth != null)
             {
+                Debug.Log("colliding");
                 playerHealth.TakeDamage(damageAmount);
+            }
+            if (playerHealth = null)
+            {
+                Debug.Log("No health script");
             }
         }
     }
 
-    void FlipSprite(float horizontalMove)
+    void OnTriggerStay2D(Collider2D other)
+    {
+        if (other.gameObject == Player)
+        {
+            // Deal damage to the player continuously while staying in the trigger area
+            PlayerHealthTest playerHealth = other.GetComponent<PlayerHealthTest>();
+            if (playerHealth != null)
+            {
+                playerHealth.TakeDamage(damageAmount);
+                Debug.Log("Colliding");
+            }
+        }
+    }
+
+        void FlipSprite(float horizontalMove)
     {
         if (horizontalMove > 0f) // Moving right
         {

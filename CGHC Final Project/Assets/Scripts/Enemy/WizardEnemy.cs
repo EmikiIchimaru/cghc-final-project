@@ -66,6 +66,12 @@ public class WizardEnemy : MonoBehaviour
         }
     }
 
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red; // Set the color of the detection range to red
+        Gizmos.DrawWireSphere(transform.position, detectionRange); // Draw a wire sphere to represent the detection range
+    }
+
 
     // Called when the wizard is hit by the player
     public void TakeDamage(int damageAmount)
@@ -125,7 +131,7 @@ public class WizardEnemy : MonoBehaviour
         }
     }
 
-        void FlipSprite(float horizontalMove)
+     void FlipSprite(float horizontalMove)
     {
         if (horizontalMove > 0f) // Moving right
         {

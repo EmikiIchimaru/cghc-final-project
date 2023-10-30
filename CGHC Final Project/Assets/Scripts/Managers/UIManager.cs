@@ -1,25 +1,30 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class UIManager : Singleton<UIManager>
 {
-    /* [Header("Settings")] 
-    [SerializeField] private Image fuelImage;  
-    [SerializeField] private GameObject[] playerLifes;	
-    
-    private float _currentJetpackFuel;
-    private float _jetpackFuel;
-    
+   /* [Header("Settings")]
+    [SerializeField] private Image fuelImage;
+    [SerializeField] private GameObject[] playerLifes; */
+
+    [Header("Coins")]
+    [SerializeField] private TextMeshProUGUI coinTMP;
+
+    // private float _currentJetpackFuel;
+    // private float _jetpackFuel;
+
     private void Update()
     {
-        InternalJetpackUpdate();            
+       // InternalJetpackUpdate();
+        UpdateCoins();
     }
 
     // Gets the fuel values
-    public void UpdateFuel(float currentFuel, float maxFuel)
+    /* public void UpdateFuel(float currentFuel, float maxFuel)
     {
         _currentJetpackFuel = currentFuel;
         _jetpackFuel = maxFuel;
@@ -30,10 +35,16 @@ public class UIManager : Singleton<UIManager>
     {
         fuelImage.fillAmount =
             Mathf.Lerp(fuelImage.fillAmount, _currentJetpackFuel / _jetpackFuel, Time.deltaTime * 10f);
+    } */
+
+    // Updates the coins
+    private void UpdateCoins()
+    {
+        coinTMP.text = CoinManager.Instance.TotalCoins.ToString();
     }
 
     // Updates the player lifes
-    private void OnPlayerLifes(int currentLifes)
+    /*private void OnPlayerLifes(int currentLifes)
     {
         for (int i = 0; i < playerLifes.Length; i++)
         {
@@ -46,7 +57,7 @@ public class UIManager : Singleton<UIManager>
                 playerLifes[i].gameObject.SetActive(false);
             }
         }
-    } 
+    }
 
     private void OnEnable()
     {
@@ -56,5 +67,5 @@ public class UIManager : Singleton<UIManager>
     private void OnDisable()
     {
         Health.OnLifesChanged -= OnPlayerLifes;
-    }    */
+    } */
 }

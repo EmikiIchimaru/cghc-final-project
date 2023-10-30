@@ -39,6 +39,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Collectables
+    uniqueID: 3317203327
+    locked: 0
   - name: Background
     uniqueID: 3409119669
     locked: 0

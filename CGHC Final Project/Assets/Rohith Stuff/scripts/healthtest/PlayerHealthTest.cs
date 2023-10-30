@@ -32,6 +32,7 @@ public class PlayerHealthTest : MonoBehaviour
         {
             // Call the KillPlayer method from the Health component
             healthComponent.KillPlayer();
+            currentHealth = maxHealth;
         }
         else
         {

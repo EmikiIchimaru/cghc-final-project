@@ -5,32 +5,32 @@ using UnityEngine.Animations;
 
 public class PlayerJetpack : PlayerStates
 {
-	/* [Header("Settings")] 
+	[Header("Settings")] 
     [SerializeField] private float jetpackForce = 3f;
     [SerializeField] private float jetpackFuel = 5f;
        
     private float _fuelLeft;
-    private float _fuelDurectionLeft;
+    private float _fuelDirectionLeft;
 	private bool _stillHaveFuel = true;
 
-    private int _jetpackParameter = Animator.StringToHash("Jetpack");
+    private int _jetpackParameter = Animator.StringToHash("Idle");
 
     protected override void InitState()
     {
         base.InitState();
-        _fuelDurectionLeft = jetpackFuel;
+        _fuelDirectionLeft = jetpackFuel;
 		_fuelLeft = jetpackFuel;
 		UIManager.Instance.UpdateFuel(_fuelLeft, jetpackFuel);
     }
 
     protected override void GetInput()
     {
-        if (Input.GetKey(KeyCode.X))
+        if (Input.GetKey(KeyCode.E))
         {
             Jetpack();
         }
 
-        if (Input.GetKeyUp(KeyCode.X))
+        if (Input.GetKeyUp(KeyCode.E))
         {
             EndJetpack();
         }
@@ -73,6 +73,17 @@ public class PlayerJetpack : PlayerStates
         }
     }
 
+    /*private IEnumerator BurnFuel()
+    {
+        while (_fuelLeft > 0 && _playerController.Conditions.IsJetpacking)
+        {
+            _fuelLeft -= Time.deltaTime;
+            UIManager.Instance.UpdateFuel(_fuelLeft, jetpackFuel);
+            yield return null;
+        }
+        EndJetpack(); // Call EndJetpack when fuel is depleted
+    }*/
+
     private IEnumerator Refill()
     {
         yield return new WaitForSeconds(0.5f);
@@ -95,5 +106,5 @@ public class PlayerJetpack : PlayerStates
     public override void SetAnimation()
     {
         _animator.SetBool(_jetpackParameter, _playerController.Conditions.IsJetpacking);
-    }  */   
+    }
 }

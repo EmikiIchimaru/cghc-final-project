@@ -7,24 +7,28 @@ using UnityEngine.UI;
 
 public class UIManager : Singleton<UIManager>
 {
-   /* [Header("Settings")]
+    [Header("Settings")]
     [SerializeField] private Image fuelImage;
-    [SerializeField] private GameObject[] playerLifes; */
+    //[SerializeField] private GameObject[] playerLifes;
 
     [Header("Coins")]
     [SerializeField] private TextMeshProUGUI coinTMP;
 
-    // private float _currentJetpackFuel;
-    // private float _jetpackFuel;
+    private float _currentJetpackFuel;
+    private float _jetpackFuel;
+    private void Start()
+    {
+        ResetCoins(); // Call the method to reset coins when the scene starts
+    }
 
     private void Update()
     {
-       // InternalJetpackUpdate();
+        InternalJetpackUpdate();
         UpdateCoins();
     }
 
     // Gets the fuel values
-    /* public void UpdateFuel(float currentFuel, float maxFuel)
+    public void UpdateFuel(float currentFuel, float maxFuel)
     {
         _currentJetpackFuel = currentFuel;
         _jetpackFuel = maxFuel;
@@ -35,12 +39,18 @@ public class UIManager : Singleton<UIManager>
     {
         fuelImage.fillAmount =
             Mathf.Lerp(fuelImage.fillAmount, _currentJetpackFuel / _jetpackFuel, Time.deltaTime * 10f);
-    } */
+    }
 
     // Updates the coins
     private void UpdateCoins()
     {
         coinTMP.text = CoinManager.Instance.TotalCoins.ToString();
+    }
+
+    public void ResetCoins()
+    {
+        CoinManager.Instance.TotalCoins = 0;
+        UpdateCoins();
     }
 
     // Updates the player lifes

@@ -216,11 +216,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4336594351233565667}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 86a4b691fd6ad9c4d9a8fb3bdbcc609d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  jetpackForce: 3
+  jetpackFuel: 5
 --- !u!95 &4336594351233565657
 Animator:
   serializedVersion: 5

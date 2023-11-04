@@ -13,6 +13,8 @@ public class PlayerMovement : PlayerStates
     private int _idleAnimatorParameter = Animator.StringToHash("Idle");
     private int _runAnimatorParameter = Animator.StringToHash("Run");
 
+
+
     protected override void InitState()
     {
         base.InitState();        

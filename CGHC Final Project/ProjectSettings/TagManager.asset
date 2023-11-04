@@ -7,7 +7,6 @@ TagManager:
   - CheckPoint
   - Boss
   - HealthBarUI
-  - Teleporter
   layers:
   - Default
   - TransparentFX

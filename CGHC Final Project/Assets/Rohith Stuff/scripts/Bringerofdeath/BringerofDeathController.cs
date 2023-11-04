@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class CreatureController : MonoBehaviour
+public class BringerofDeathController : MonoBehaviour
 {
     public Transform[] teleportAreas;
     private int attacksCount = 0;

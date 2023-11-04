@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class SecondBoss : MonoBehaviour
+public class CreatureController : MonoBehaviour
 {
     public Transform[] waypoints;
     public float moveSpeed = 5f;

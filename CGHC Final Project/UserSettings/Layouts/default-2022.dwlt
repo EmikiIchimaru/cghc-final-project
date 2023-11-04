@@ -21,7 +21,11 @@ MonoBehaviour:
   m_ShowMode: 4
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   m_Title: Game
+=======
+  m_Title: Console
+>>>>>>> Stashed changes
 =======
   m_Title: Console
 >>>>>>> Stashed changes
@@ -133,6 +137,7 @@ MonoBehaviour:
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   controlID: 89
 =======
     x: 0
@@ -146,6 +151,9 @@ MonoBehaviour:
   - {fileID: 16}
   m_Selected: 0
   m_LastSelected: 0
+>>>>>>> Stashed changes
+=======
+  controlID: 165
 >>>>>>> Stashed changes
 =======
   controlID: 165
@@ -799,6 +807,7 @@ MonoBehaviour:
 <<<<<<< Updated upstream
     x: 1331
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     y: 738
     width: 285
     height: 253
@@ -807,6 +816,11 @@ MonoBehaviour:
     y: 500.80002
     width: 1171.8
     height: 274.59998
+>>>>>>> Stashed changes
+=======
+    y: 632
+    width: 275
+    height: 359
 >>>>>>> Stashed changes
 =======
     y: 632
@@ -854,12 +868,16 @@ MonoBehaviour:
     m_SelectedIDs: 5c5f0000
     m_LastClickedID: 24412
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     m_ExpandedIDs: 0000000064de000068de000066df000068df00006adf00006cdf00006edf000070df000072df000074df000076df000078df00007adf00007cdf00007edf000080df000082df000084df000086df0000
 =======
     scrollPos: {x: 0, y: 321.40002}
     m_SelectedIDs: 4e210100
     m_LastClickedID: 74062
     m_ExpandedIDs: 000000004a2101004c2101004e210100d22201001823010000ca9a3bffffff7f
+>>>>>>> Stashed changes
+=======
+    m_ExpandedIDs: 00000000a6dd0000aadd00002ae000002ce000002ee0000030e0000032e0000034e0000036e0000038e000003ae000003ce000003ee0000040e0000042e0000044e0000046e0000048e000004ae000004ce00000
 >>>>>>> Stashed changes
 =======
     m_ExpandedIDs: 00000000a6dd0000aadd00002ae000002ce000002ee0000030e0000032e0000034e0000036e0000038e000003ae000003ce000003ee0000040e0000042e0000044e0000046e0000048e000004ae000004ce00000
@@ -890,7 +908,11 @@ MonoBehaviour:
   m_AssetTreeState:
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     scrollPos: {x: 0, y: 961}
+=======
+    scrollPos: {x: 0, y: 1022.72284}
+>>>>>>> Stashed changes
 =======
     scrollPos: {x: 0, y: 1022.72284}
 >>>>>>> Stashed changes
@@ -899,6 +921,7 @@ MonoBehaviour:
     m_ExpandedIDs: ffffffff00000000a6dd0000aadd00002ae000002ce000002ee0000030e0000032e0000034e0000036e0000038e000003ae000003ce000003ee0000040e0000042e0000044e0000046e0000048e000004ae000004ce0000068270100
     m_RenameOverlay:
       m_UserAcceptedRename: 0
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
       m_Name: Bringerofdeath
       m_OriginalName: Bringerofdeath
@@ -916,6 +939,10 @@ MonoBehaviour:
       m_Name: 
       m_OriginalName: 
 >>>>>>> Stashed changes
+=======
+      m_Name: 
+      m_OriginalName: 
+>>>>>>> Stashed changes
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
@@ -924,7 +951,11 @@ MonoBehaviour:
         height: 0
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
       m_UserData: 78898
+=======
+      m_UserData: 0
+>>>>>>> Stashed changes
 =======
       m_UserData: 0
 >>>>>>> Stashed changes
@@ -1641,6 +1672,7 @@ MonoBehaviour:
     x: 1331
     y: 73
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     width: 285
     height: 644
 =======
@@ -1648,6 +1680,10 @@ MonoBehaviour:
     y: 73.6
     width: 798.00006
     height: 406.2
+>>>>>>> Stashed changes
+=======
+    width: 275
+    height: 538
 >>>>>>> Stashed changes
 =======
     width: 275
@@ -1816,7 +1852,11 @@ MonoBehaviour:
     serializedVersion: 2
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     x: 1618
+=======
+    x: 1608
+>>>>>>> Stashed changes
 =======
     x: 1608
 >>>>>>> Stashed changes

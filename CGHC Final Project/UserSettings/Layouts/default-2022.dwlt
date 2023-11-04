@@ -19,6 +19,7 @@ MonoBehaviour:
     width: 1920
     height: 989
   m_ShowMode: 4
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
@@ -35,6 +36,9 @@ MonoBehaviour:
 >>>>>>> Stashed changes
 =======
   m_Title: Console
+>>>>>>> Stashed changes
+=======
+  m_Title: Animator
 >>>>>>> Stashed changes
   m_RootView: {fileID: 5}
   m_MinSize: {x: 875, y: 300}
@@ -119,6 +123,7 @@ MonoBehaviour:
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   controlID: 89
 <<<<<<< HEAD
 =======
@@ -145,6 +150,9 @@ MonoBehaviour:
 >>>>>>> Stashed changes
 =======
 >>>>>>> parent of 77a7d509 (3000)
+=======
+  controlID: 130
+>>>>>>> Stashed changes
 --- !u!114 &5
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -241,7 +249,11 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 150}
   m_MaxSize: {x: 24288, y: 24288}
   vertical: 0
+<<<<<<< Updated upstream
   controlID: 203
+=======
+  controlID: 208
+>>>>>>> Stashed changes
 --- !u!114 &9
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -286,9 +298,15 @@ MonoBehaviour:
     x: 0
     y: 0
     width: 1331
+<<<<<<< Updated upstream
     height: 186
   m_MinSize: {x: 100, y: 100}
   m_MaxSize: {x: 4000, y: 4000}
+=======
+    height: 269
+  m_MinSize: {x: 101, y: 121}
+  m_MaxSize: {x: 4001, y: 4021}
+>>>>>>> Stashed changes
   m_ActualView: {fileID: 14}
   m_Panes:
   - {fileID: 20}
@@ -313,9 +331,9 @@ MonoBehaviour:
   m_Position:
     serializedVersion: 2
     x: 0
-    y: 186
+    y: 269
     width: 1331
-    height: 472
+    height: 389
   m_MinSize: {x: 201, y: 221}
   m_MaxSize: {x: 4001, y: 4021}
   m_ActualView: {fileID: 17}
@@ -343,8 +361,13 @@ MonoBehaviour:
     y: 0
     width: 277
     height: 559
+<<<<<<< Updated upstream
   m_MinSize: {x: 200, y: 200}
   m_MaxSize: {x: 4000, y: 4000}
+=======
+  m_MinSize: {x: 202, y: 221}
+  m_MaxSize: {x: 4002, y: 4021}
+>>>>>>> Stashed changes
   m_ActualView: {fileID: 21}
   m_Panes:
   - {fileID: 21}
@@ -400,7 +423,7 @@ MonoBehaviour:
     x: 0
     y: 73
     width: 1330
-    height: 165
+    height: 248
   m_SerializedDataModeController:
     m_DataMode: 0
     m_PreferredDataMode: 0
@@ -536,9 +559,9 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 0
-    y: 259
+    y: 342
     width: 1330
-    height: 451
+    height: 368
   m_SerializedDataModeController:
     m_DataMode: 0
     m_PreferredDataMode: 0
@@ -592,22 +615,22 @@ MonoBehaviour:
       x: 0
       y: 21
       width: 1330
-      height: 430
-    m_Scale: {x: 0.39814815, y: 0.39814815}
-    m_Translation: {x: 665, y: 215}
+      height: 347
+    m_Scale: {x: 0.32129633, y: 0.3212963}
+    m_Translation: {x: 665, y: 173.5}
     m_MarginLeft: 0
     m_MarginRight: 0
     m_MarginTop: 0
     m_MarginBottom: 0
     m_LastShownAreaInsideMargins:
       serializedVersion: 2
-      x: -1670.2325
+      x: -2069.7405
       y: -540
-      width: 3340.465
+      width: 4139.481
       height: 1080
     m_MinimalGUI: 1
-  m_defaultScale: 0.39814815
-  m_LastWindowPixelSize: {x: 1330, y: 451}
+  m_defaultScale: 0.3212963
+  m_LastWindowPixelSize: {x: 1330, y: 368}
   m_ClearInEditMode: 1
   m_NoCameraWarning: 1
   m_LowResolutionForAspectRatios: 01000000000000000000
@@ -634,6 +657,7 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 1331
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
@@ -664,6 +688,11 @@ MonoBehaviour:
 >>>>>>> Stashed changes
 =======
 >>>>>>> parent of 77a7d509 (3000)
+=======
+    y: 632
+    width: 275
+    height: 359
+>>>>>>> Stashed changes
   m_SerializedDataModeController:
     m_DataMode: 0
     m_PreferredDataMode: 0
@@ -694,13 +723,14 @@ MonoBehaviour:
   m_StartGridSize: 64
   m_LastFolders: []
   m_LastFoldersGridSize: -1
-  m_LastProjectPath: D:\Github\cghc-final-project\CGHC Final Project
+  m_LastProjectPath: D:\CGHC GE BACKUPFILE\cghc-final-project\CGHC Final Project
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 5c5f0000
     m_LastClickedID: 24412
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
@@ -723,6 +753,9 @@ MonoBehaviour:
 >>>>>>> Stashed changes
 =======
 >>>>>>> parent of 77a7d509 (3000)
+=======
+    m_ExpandedIDs: 00000000cadb0000cedb000052de000054de000056de000058de00005ade00005cde00005ede000060de000062de000064de000066de000068de00006ade00006cde00006ede000070de000072de000074de000076de0000
+>>>>>>> Stashed changes
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -747,6 +780,7 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_AssetTreeState:
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
@@ -799,12 +833,23 @@ MonoBehaviour:
 >>>>>>> Stashed changes
 =======
 >>>>>>> parent of 77a7d509 (3000)
+=======
+    scrollPos: {x: 0, y: 1022.72284}
+    m_SelectedIDs: 
+    m_LastClickedID: 0
+    m_ExpandedIDs: ffffffff00000000cadb0000cedb000052de000054de000056de000058de00005ade00005cde00005ede000060de000062de000064de000066de000068de00006ade00006cde00006ede000070de000072de000074de000076de0000
+    m_RenameOverlay:
+      m_UserAcceptedRename: 0
+      m_Name: 
+      m_OriginalName: 
+>>>>>>> Stashed changes
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
@@ -826,9 +871,12 @@ MonoBehaviour:
 =======
       m_UserData: 78898
 >>>>>>> parent of 77a7d509 (3000)
+=======
+      m_UserData: 0
+>>>>>>> Stashed changes
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
-      m_OriginalEventType: 0
+      m_OriginalEventType: 11
       m_IsRenamingFilename: 1
       m_ClientGUIView: {fileID: 3}
     m_SearchString: 
@@ -1403,6 +1451,7 @@ MonoBehaviour:
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     width: 285
     height: 644
 <<<<<<< HEAD
@@ -1426,6 +1475,10 @@ MonoBehaviour:
 >>>>>>> Stashed changes
 =======
 >>>>>>> parent of 77a7d509 (3000)
+=======
+    width: 275
+    height: 538
+>>>>>>> Stashed changes
   m_SerializedDataModeController:
     m_DataMode: 0
     m_PreferredDataMode: 0
@@ -1439,9 +1492,15 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
+<<<<<<< Updated upstream
       m_SelectedIDs: 4c340000
       m_LastClickedID: 0
       m_ExpandedIDs: 4cf5ffff
+=======
+      m_SelectedIDs: 54f9ffff
+      m_LastClickedID: 0
+      m_ExpandedIDs: e6faffff
+>>>>>>> Stashed changes
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -1519,6 +1578,7 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
@@ -1527,6 +1587,9 @@ MonoBehaviour:
 =======
 >>>>>>> parent of 77a7d509 (3000)
     x: 1618
+=======
+    x: 1608
+>>>>>>> Stashed changes
 =======
     x: 1608
 >>>>>>> Stashed changes

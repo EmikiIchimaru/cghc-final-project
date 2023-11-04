@@ -131,8 +131,11 @@ public class CreatureController : MonoBehaviour
 
     void OnDrawGizmosSelected()
     {
+        Gizmos.color = Color.blue; // Set the color of the attack range to blue
+        Gizmos.DrawWireSphere(transform.position, attackDistance); // Draw a wire sphere to represent the attack range
+
         Gizmos.color = Color.red; // Set the color of the detection range to red
-        Gizmos.DrawWireSphere(transform.position, detectionRange); // Draw a wire sphere to represent the detection range
+        Gizmos.DrawWireSphere(transform.position, detectionRange);
     }
 
     public void TakeHit()

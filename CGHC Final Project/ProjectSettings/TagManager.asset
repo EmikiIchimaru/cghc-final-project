@@ -6,6 +6,7 @@ TagManager:
   tags:
   - CheckPoint
   - Boss
+  - HealthBarUI
   layers:
   - Default
   - TransparentFX

@@ -9,6 +9,7 @@ TagManager:
   - HealthBarUI
   - Teleporter
   - Creature
+  - BOD
   layers:
   - Default
   - TransparentFX

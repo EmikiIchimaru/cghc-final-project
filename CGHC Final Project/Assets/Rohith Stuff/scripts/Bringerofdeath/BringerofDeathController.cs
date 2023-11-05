@@ -1,4 +1,7 @@
 using UnityEngine;
+using UnityEngine.UI;
+using System.Collections;
+using System.Collections.Generic;
 
 public class BringerofDeathController : MonoBehaviour
 {
@@ -12,6 +15,9 @@ public class BringerofDeathController : MonoBehaviour
     private bool isIdle = true;
     private bool isUsingSecondAttack = false; // Added variable to track second attack state
     public float spellCastDelay = 0f; // Delay before dealing damage after spell animation
+    public int maxHealth = 100;
+    private int currentHealth;
+    public Slider healthSlider;
 
     private void Start()
     {
@@ -19,6 +25,8 @@ public class BringerofDeathController : MonoBehaviour
         Player = GameObject.FindGameObjectWithTag("Player");
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        currentHealth = maxHealth;
+        UpdateHealthUI();
     }
 
     private void Update()
@@ -31,9 +39,7 @@ public class BringerofDeathController : MonoBehaviour
 
             if (distanceToPlayer <= attackRange)
             {
-              
                 int randomAttack = Random.Range(1, 3); // Randomly select Attack1 or Attack2
-             
                 animator.SetInteger("AttackIndex", randomAttack);
 
                 // For the second boss, set isUsingSecondAttack to true when using the second attack
@@ -42,7 +48,6 @@ public class BringerofDeathController : MonoBehaviour
                     isUsingSecondAttack = true;
                     CastAnimationEnd();
                 }
-
             }
             else
             {
@@ -102,6 +107,7 @@ public class BringerofDeathController : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, attackRange);
     }
+
     private void SetSpellAnimationTrue()
     {
         animator.SetBool("IsSpell", true);
@@ -112,6 +118,35 @@ public class BringerofDeathController : MonoBehaviour
     {
         animator.SetBool("IsSpell", false);
     }
+
+    public void TakeDamage(int damage)
+    {
+        currentHealth -= damage;
+        UpdateHealthUI();
+
+        if (currentHealth <= 0)
+        {
+            Die();
+        }
+    }
+
+    void UpdateHealthUI()
+    {
+        if (healthSlider != null)
+        {
+            healthSlider.value = (float)currentHealth / maxHealth;
+        }
+    }
+
+    void Die()
+    {
+        // Play death animation
+        animator.SetTrigger("Die");
+
+        // Wait for 2 seconds before destroying the creature
+        Destroy(gameObject, 2f);
+    }
+
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject == Player)
@@ -124,11 +159,10 @@ public class BringerofDeathController : MonoBehaviour
                 Debug.Log("colliding");
                 playerHealth.TakeDamage(damageAmount);
             }
-            if (playerHealth = null)
+            if (playerHealth == null)
             {
                 Debug.Log("No health script");
             }
         }
     }
-
 }

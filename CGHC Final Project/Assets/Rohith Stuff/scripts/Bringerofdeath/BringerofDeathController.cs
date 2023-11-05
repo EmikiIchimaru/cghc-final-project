@@ -145,7 +145,7 @@ public class BringerofDeathController : MonoBehaviour
         animator.SetTrigger("Die");
         Destroy(anotherGameObject);
         // Wait for 2 seconds before destroying the creature
-        Destroy(gameObject, 2f);
+        Destroy(gameObject, animator.GetCurrentAnimatorStateInfo(0).length);
     }
 
     void OnTriggerEnter2D(Collider2D other)

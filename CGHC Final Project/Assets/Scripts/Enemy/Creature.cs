@@ -142,7 +142,7 @@ public class CreatureController : MonoBehaviour
         animator.SetTrigger("Die");
 
         // Wait for 2 seconds before destroying the creature
-        Destroy(gameObject, 2f);
+        Destroy(gameObject, animator.GetCurrentAnimatorStateInfo(0).length);
     }
 
     void FlipSprite(float horizontalMove)
@@ -154,6 +154,34 @@ public class CreatureController : MonoBehaviour
         else if (horizontalMove < 0f) // Moving left
         {
             transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+        }
+    }
+    private void OnDrawGizmos()
+    {
+        // Draw detection range (detectionRange variable)
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, detectionRange);
+
+        // Draw attack range (attackDistance variable)
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, attackDistance);
+    }
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject == player)
+        {
+            int damageAmount = Random.Range(10, 21);
+            // Deal damage to the wizard
+            PlayerHealthTest playerHealth = other.GetComponent<PlayerHealthTest>();
+            if (playerHealth != null)
+            {
+                Debug.Log("colliding");
+                playerHealth.TakeDamage(damageAmount);
+            }
+            if (playerHealth == null)
+            {
+                Debug.Log("No health script");
+            }
         }
     }
 }

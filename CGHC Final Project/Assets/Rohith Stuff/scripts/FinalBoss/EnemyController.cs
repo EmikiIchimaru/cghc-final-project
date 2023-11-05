@@ -29,6 +29,7 @@ public class EnemyController : MonoBehaviour
 
     private void Update()
     {
+        
         float distanceToPlayer = Vector2.Distance(transform.position, player.position);
 
         if (distanceToPlayer <= detectionRange)
@@ -83,6 +84,7 @@ public class EnemyController : MonoBehaviour
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
+        animator.SetBool("Takehit", true);
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth); // Ensure health doesn't go below 0
         UpdateHealthUI();
 
@@ -93,8 +95,9 @@ public class EnemyController : MonoBehaviour
         else
         {
             // Play hit animation or effect if needed
-            animator.SetTrigger("Takehit");
+            animator.SetBool("Takehit", false);
         }
+        
     }
 
     void UpdateHealthUI()

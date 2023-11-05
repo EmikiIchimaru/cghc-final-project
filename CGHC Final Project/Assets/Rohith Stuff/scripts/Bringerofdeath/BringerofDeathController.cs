@@ -5,17 +5,18 @@ public class BringerofDeathController : MonoBehaviour
     public float detectionRange = 5f;
     public float attackRange = 2f;
     public float moveSpeed = 2f;
-
+    public GameObject Player;
     private Transform player;
     private Animator animator;
     private SpriteRenderer spriteRenderer;
     private bool isIdle = true;
     private bool isUsingSecondAttack = false; // Added variable to track second attack state
-    public float spellCastDelay = 1f; // Delay before dealing damage after spell animation
+    public float spellCastDelay = 0f; // Delay before dealing damage after spell animation
 
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        Player = GameObject.FindGameObjectWithTag("Player");
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
@@ -30,8 +31,9 @@ public class BringerofDeathController : MonoBehaviour
 
             if (distanceToPlayer <= attackRange)
             {
-                isIdle = false;
+              
                 int randomAttack = Random.Range(1, 3); // Randomly select Attack1 or Attack2
+             
                 animator.SetInteger("AttackIndex", randomAttack);
 
                 // For the second boss, set isUsingSecondAttack to true when using the second attack
@@ -40,6 +42,7 @@ public class BringerofDeathController : MonoBehaviour
                     isUsingSecondAttack = true;
                     CastAnimationEnd();
                 }
+
             }
             else
             {
@@ -109,4 +112,23 @@ public class BringerofDeathController : MonoBehaviour
     {
         animator.SetBool("IsSpell", false);
     }
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject == Player)
+        {
+            int damageAmount = Random.Range(10, 21);
+            // Deal damage to the wizard
+            PlayerHealthTest playerHealth = other.GetComponent<PlayerHealthTest>();
+            if (playerHealth != null)
+            {
+                Debug.Log("colliding");
+                playerHealth.TakeDamage(damageAmount);
+            }
+            if (playerHealth = null)
+            {
+                Debug.Log("No health script");
+            }
+        }
+    }
+
 }

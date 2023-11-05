@@ -2,113 +2,111 @@ using UnityEngine;
 
 public class BringerofDeathController : MonoBehaviour
 {
-    public Transform[] teleportAreas;
-    private int attacksCount = 0;
-    private bool isCastingSpell = false;
-    private bool isAttacking = false;
-    public GameObject player;
-    public Animator animator;
+    public float detectionRange = 5f;
+    public float attackRange = 2f;
+    public float moveSpeed = 2f;
 
-    void Start()
+    private Transform player;
+    private Animator animator;
+    private SpriteRenderer spriteRenderer;
+    private bool isIdle = true;
+    private bool isUsingSecondAttack = false; // Added variable to track second attack state
+    public float spellCastDelay = 1f; // Delay before dealing damage after spell animation
+
+    private void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
+        player = GameObject.FindGameObjectWithTag("Player").transform;
+        animator = GetComponent<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-    void Update()
+    private void Update()
     {
-        CheckPlayerInRange();
-        float distanceToPlayer = Vector2.Distance(transform.position, player.transform.position);
+        float distanceToPlayer = Vector2.Distance(transform.position, player.position);
 
-        if (!isAttacking && !isCastingSpell && attacksCount < 3)
-        {
-            isAttacking = true;
-            attacksCount++;
-            PlayMainAttackAnimation();
-        }
-        else if (!isAttacking && !isCastingSpell && attacksCount >= 3)
-        {
-            TeleportToRandomArea();
-            isCastingSpell = true;
-            PlayTeleportAnimation();
-        }
-
-        bool isMoving = (Vector2)transform.position != (Vector2)teleportAreas[0].position;
-        animator.SetBool("Flight", isMoving && !isAttacking);
-    }
-
-    void PlayMainAttackAnimation()
-    {
-        // Implement your logic to play the main attack animation (sword attack)
-        // Example: animator.SetTrigger("MainAttack");
-        Debug.Log("Playing Main Attack Animation");
-    }
-
-    void TeleportToRandomArea()
-    {
-        Transform teleportArea = teleportAreas[Random.Range(0, teleportAreas.Length)];
-        transform.position = teleportArea.position;
-        Debug.Log("Teleporting to Random Area");
-    }
-
-    void PlayTeleportAnimation()
-    {
-        // Implement your logic to play the teleportation animation
-        // Example: animator.SetTrigger("Teleport");
-        Debug.Log("Playing Teleport Animation");
-        PlaySpellCastingAnimation(); // Call spell casting animation after teleportation animation
-    }
-
-    void PlaySpellCastingAnimation()
-    {
-        // Implement your logic to play the spell casting animation
-        // Example: animator.SetTrigger("SpellCast");
-        Debug.Log("Playing Spell Casting Animation");
-
-        // After spell casting animation, handle spell effect towards player's position
-        Vector3 targetPosition = player.transform.position;
-        // Implement logic to cast the spell effect towards targetPosition
-        Debug.Log("Casting Spell towards Player");
-    }
-
-    void CheckPlayerInRange()
-    {
-        float detectionRange = 5f; // Set your detection range here
-        float distanceToPlayer = Vector2.Distance(transform.position, player.transform.position);
         if (distanceToPlayer <= detectionRange)
         {
-            // Player is in range
-            Debug.Log("Player in Range");
+            Vector2 direction = (player.position - transform.position).normalized;
+
+            if (distanceToPlayer <= attackRange)
+            {
+                isIdle = false;
+                int randomAttack = Random.Range(1, 3); // Randomly select Attack1 or Attack2
+                animator.SetInteger("AttackIndex", randomAttack);
+
+                // For the second boss, set isUsingSecondAttack to true when using the second attack
+                if (randomAttack == 2)
+                {
+                    isUsingSecondAttack = true;
+                    CastAnimationEnd();
+                }
+            }
+            else
+            {
+                isIdle = false;
+                animator.SetInteger("AttackIndex", 0);
+                transform.Translate(direction * moveSpeed * Time.deltaTime);
+
+                if (direction.x < 0)
+                {
+                    spriteRenderer.flipX = false;
+                }
+                else if (direction.x > 0)
+                {
+                    spriteRenderer.flipX = true;
+                }
+            }
         }
         else
         {
-            // Player is out of range
-            Debug.Log("Player out of Range");
+            isIdle = true;
+            animator.SetInteger("AttackIndex", 0);
         }
+
+        animator.SetBool("IsIdle", isIdle);
     }
 
-    void OnTriggerEnter2D(Collider2D other)
+    // Method to be called when the cast animation ends (via animation events)
+    public void CastAnimationEnd()
     {
-        if (other.gameObject == player)
+        if (isUsingSecondAttack)
         {
-            // Deal damage to the player
-            int damageAmount = 10; // Set your damage amount here
-            PlayerHealthTest playerHealth = other.GetComponent<PlayerHealthTest>();
-            if (playerHealth != null)
-            {
-                playerHealth.TakeDamage(damageAmount);
-                Debug.Log("Dealing Damage to Player: " + damageAmount);
-            }
+            // Find the player's position
+            Vector3 targetPosition = player.position;
+
+            // Implement spell animation logic here targeting the player's position
+            Debug.Log("Casting Spell Animation towards Player's Position");
+
+            // Set the "IsSpell" parameter to true to trigger the transition to the "Spell" state
+            SetSpellAnimationTrue();
+
+            // Add damage logic here (e.g., Instantiate a spell prefab at targetPosition)
+            // Instantiate(spellPrefab, targetPosition, Quaternion.identity);
+
+            // Reset the second attack flag after spell animation ends (or wherever appropriate)
+            isUsingSecondAttack = false;
+
+            // Set the "IsSpell" parameter to false after using the spell animation
+            Invoke("SetSpellAnimationFalse", spellCastDelay); // Delay setting the bool to false if needed
         }
     }
 
-    void OnDrawGizmosSelected()
+    private void OnDrawGizmosSelected()
     {
-        float attackDistance = 1.5f; // Set your attack distance here
-        Gizmos.color = Color.blue; // Set the color of the attack range to blue
-        Gizmos.DrawWireSphere(transform.position, attackDistance); // Draw a wire sphere to represent the attack range
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, detectionRange);
 
-        float detectionRange = 5f; // Set your detection range here
-        Gizmos.color = Color.red; // Set the color of the detection range to red
-        Gizmos.DrawWireSphere(transform.position, detectionRange); // Draw a wire sphere to represent the detection range
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, attackRange);
+    }
+    private void SetSpellAnimationTrue()
+    {
+        animator.SetBool("IsSpell", true);
+    }
+
+    // Method to set the "IsSpell" parameter to false in the animator
+    private void SetSpellAnimationFalse()
+    {
+        animator.SetBool("IsSpell", false);
     }
 }

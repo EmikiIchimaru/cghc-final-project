@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class EnemyController : MonoBehaviour
 {
+    public GameObject UI;
     public float detectionRange = 5f;
     public float attackRange = 2f;
     public float moveSpeed = 2f;
@@ -105,8 +106,13 @@ public class EnemyController : MonoBehaviour
     }
     void Die()
     {
-        // Play death animation or handle death logic here
         animator.SetTrigger("Die");
+
+        // Enable the specified GameObject after the death animation
+        if (UI != null)
+        {
+            UI.SetActive(true);
+        }
 
         // Destroy the wizard after the death animation
         Destroy(gameObject, animator.GetCurrentAnimatorStateInfo(0).length);

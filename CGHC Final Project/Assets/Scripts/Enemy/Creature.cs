@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CreatureController : MonoBehaviour
 {
@@ -8,19 +9,21 @@ public class CreatureController : MonoBehaviour
     public float attackSpeed = 10f;
     public GameObject player;
     public Animator animator;
-    public int damageAmount = 10;
     public float attackDistance = 1.5f;
     private bool playerInRange = false;
     private Transform currentWaypoint;
     private bool isAttacking = false;
-
+    public int maxHealth = 100;
+    private int currentHealth;
+    public Slider healthSlider;
 
     void Start()
     {
         // Set the initial waypoint
         currentWaypoint = GetRandomWaypoint();
         player = GameObject.FindGameObjectWithTag("Player");
-
+        currentHealth = maxHealth;
+        UpdateHealthUI();
     }
 
     void Update()
@@ -92,15 +95,8 @@ public class CreatureController : MonoBehaviour
 
     void AttackPlayer()
     {
-        // Trigger random attack animation
-        int randomAttack = Random.Range(0, 2);
-        animator.SetTrigger("Attack" + (randomAttack + 1));
-
-        // Wait for the attack animation to finish before allowing movement again
-
+        // Implement your attack logic here
     }
-
- 
 
     void CheckPlayerInRange()
     {
@@ -115,38 +111,38 @@ public class CreatureController : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter2D(Collider2D other)
+    public void TakeDamage(int damage)
     {
-        if (other.gameObject == player)
-        {
-            // Deal damage to the wizard
-            PlayerHealthTest playerHealth = other.GetComponent<PlayerHealthTest>();
-            if (playerHealth != null)
-            {
-                playerHealth.TakeDamage(damageAmount);
-            }
+        currentHealth -= damage;
+        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth); // Ensure health doesn't go below 0
+        UpdateHealthUI();
 
+        if (currentHealth <= 0)
+        {
+            Die();
+        }
+        else
+        {
+            // Play hit animation or effect if needed
+            animator.SetTrigger("Takehit");
         }
     }
 
-    void OnDrawGizmosSelected()
+    void UpdateHealthUI()
     {
-        Gizmos.color = Color.blue; // Set the color of the attack range to blue
-        Gizmos.DrawWireSphere(transform.position, attackDistance); // Draw a wire sphere to represent the attack range
-
-        Gizmos.color = Color.red; // Set the color of the detection range to red
-        Gizmos.DrawWireSphere(transform.position, detectionRange);
+        if (healthSlider != null)
+        {
+            healthSlider.value = (float)currentHealth / maxHealth;
+        }
     }
 
-    public void TakeHit()
+    void Die()
     {
-        animator.SetTrigger("Takehit");
-    }
-
-
-    public void Die()
-    {
+        // Play death animation
         animator.SetTrigger("Die");
+
+        // Wait for 2 seconds before destroying the creature
+        Destroy(gameObject, 2f);
     }
 
     void FlipSprite(float horizontalMove)

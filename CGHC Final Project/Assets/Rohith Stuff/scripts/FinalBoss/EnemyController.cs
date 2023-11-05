@@ -1,11 +1,17 @@
 using UnityEngine;
+using System.Collections;
+using System;
+using System.Collections.Generic;
+using UnityEngine.UI;
 
-public class BossController : MonoBehaviour
+public class EnemyController : MonoBehaviour
 {
     public float detectionRange = 5f;
     public float attackRange = 2f;
     public float moveSpeed = 2f;
-
+    public int maxHealth = 100;
+    public Slider healthSlider;
+    private int currentHealth;
     private Transform player;
     private Animator animator;
     private SpriteRenderer spriteRenderer; // Reference to the SpriteRenderer component
@@ -16,6 +22,8 @@ public class BossController : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player").transform;
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>(); // Get the SpriteRenderer component
+        currentHealth = maxHealth;
+        UpdateHealthUI();
     }
 
     private void Update()
@@ -30,7 +38,7 @@ public class BossController : MonoBehaviour
             {
                 // Player is inside attack range, attack
                 isIdle = false;
-                int randomAttack = Random.Range(1, 3); // Randomly select Attack1 or Attack2
+                int randomAttack = UnityEngine.Random.Range(1, 3); // Randomly select Attack1 or Attack2
                 animator.SetInteger("AttackIndex", randomAttack);
             }
             else
@@ -70,5 +78,37 @@ public class BossController : MonoBehaviour
         // Draw attack range
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, attackRange);
+    }
+    public void TakeDamage(int damage)
+    {
+        currentHealth -= damage;
+        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth); // Ensure health doesn't go below 0
+        UpdateHealthUI();
+
+        if (currentHealth <= 0)
+        {
+            Die();
+        }
+        else
+        {
+            // Play hit animation or effect if needed
+            animator.SetTrigger("Takehit");
+        }
+    }
+
+    void UpdateHealthUI()
+    {
+        if (healthSlider != null)
+        {
+            healthSlider.value = (float)currentHealth / maxHealth;
+        }
+    }
+    void Die()
+    {
+        // Play death animation or handle death logic here
+        animator.SetTrigger("Die");
+
+        // Destroy the wizard after the death animation
+        Destroy(gameObject, animator.GetCurrentAnimatorStateInfo(0).length);
     }
 }

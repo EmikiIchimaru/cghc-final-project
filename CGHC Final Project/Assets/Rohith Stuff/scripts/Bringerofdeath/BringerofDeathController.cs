@@ -9,6 +9,7 @@ public class BringerofDeathController : MonoBehaviour
     public float attackRange = 2f;
     public float moveSpeed = 2f;
     public GameObject Player;
+    public GameObject anotherGameObject;
     private Transform player;
     private Animator animator;
     private SpriteRenderer spriteRenderer;
@@ -142,7 +143,7 @@ public class BringerofDeathController : MonoBehaviour
     {
         // Play death animation
         animator.SetTrigger("Die");
-
+        Destroy(anotherGameObject);
         // Wait for 2 seconds before destroying the creature
         Destroy(gameObject, 2f);
     }

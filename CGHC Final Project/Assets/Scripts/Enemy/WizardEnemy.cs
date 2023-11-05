@@ -8,6 +8,9 @@ public class WizardEnemy : MonoBehaviour
 {
     public Transform player;
     public GameObject Player;
+    public GameObject flame1; 
+    public GameObject flame2;
+    public GameObject detector;
     public float detectionRange = 5f;
     public float attackDistance = 1.5f;
     public float moveSpeed = 2f;
@@ -82,7 +85,9 @@ public class WizardEnemy : MonoBehaviour
     {
         // Play death animation or handle death logic here
         animator.SetTrigger("Die");
-
+        Destroy(flame1);
+        Destroy(flame2);
+        Destroy(detector);
         // Destroy the wizard after the death animation
         Destroy(gameObject, animator.GetCurrentAnimatorStateInfo(0).length);
     }

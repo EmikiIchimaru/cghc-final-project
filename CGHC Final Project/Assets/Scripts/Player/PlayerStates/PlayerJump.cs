@@ -31,6 +31,7 @@ public class PlayerJump : PlayerStates
         if (Input.GetKeyDown(KeyCode.Space))
         {
             Jump();
+           
         }
     }
 

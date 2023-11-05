@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class WizardEnemy : MonoBehaviour
 {
@@ -11,8 +12,8 @@ public class WizardEnemy : MonoBehaviour
     public float attackDistance = 1.5f;
     public float moveSpeed = 2f;
     public int damageAmount = 10;
-    public int maxHealth = 50;
-
+    public int maxHealth = 100;
+    public Slider healthSlider;
     private int currentHealth;
     private Animator animator;
     private SpriteRenderer spriteRenderer;
@@ -24,7 +25,8 @@ public class WizardEnemy : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
         Player = GameObject.FindGameObjectWithTag("Player");
-
+        currentHealth = maxHealth;
+        UpdateHealthUI();
     }
 
     void Update()
@@ -74,20 +76,7 @@ public class WizardEnemy : MonoBehaviour
 
 
     // Called when the wizard is hit by the player
-    public void TakeDamage(int damageAmount)
-    {
-        // Reduce wizard's health
-        currentHealth -= damageAmount;
 
-        // Play hit animation
-        animator.SetTrigger("Hit");
-
-        // Check if the wizard is dead
-        if (currentHealth <= 0)
-        {
-            Die();
-        }
-    }
 
     void Die()
     {
@@ -131,7 +120,7 @@ public class WizardEnemy : MonoBehaviour
         }
     }
 
-     void FlipSprite(float horizontalMove)
+    void FlipSprite(float horizontalMove)
     {
         if (horizontalMove > 0f) // Moving right
         {
@@ -143,4 +132,30 @@ public class WizardEnemy : MonoBehaviour
         }
         // No flip if horizontalMove is 0 (not moving horizontally)
     }
+    public void TakeDamage(int damage)
+    {
+        currentHealth -= damage;
+        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth); // Ensure health doesn't go below 0
+        UpdateHealthUI();
+
+        if (currentHealth <= 0)
+        {
+            Die();
+        }
+        else
+        {
+            // Play hit animation or effect if needed
+            animator.SetTrigger("Takehit");
+        }
+    }
+
+    void UpdateHealthUI()
+    {
+        if (healthSlider != null)
+        {
+            healthSlider.value = (float)currentHealth / maxHealth;
+        }
+    }
+
+
 }

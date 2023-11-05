@@ -7,11 +7,13 @@ public class PlayerSword : MonoBehaviour
     public int damageAmount = 30;
     public GameObject creature;
     public GameObject bringerofdeath;
+    public GameObject Wizard;
     // Start is called before the first frame update
     void Start()
     {
         creature = GameObject.FindGameObjectWithTag("Creature");
         bringerofdeath = GameObject.FindGameObjectWithTag("BOD");
+        Wizard = GameObject.FindGameObjectWithTag("Wizard");
     }
 
     // Update is called once per frame
@@ -24,6 +26,7 @@ public class PlayerSword : MonoBehaviour
         // Check if the sword collides with the creature
         CreatureController creatureController = other.GetComponent<CreatureController>();
         BringerofDeathController bringerofdeathController = other.GetComponent<BringerofDeathController>();
+        WizardEnemy wizardenemy = other.GetComponent<WizardEnemy>();
 
         if (creatureController != null)
         {
@@ -35,6 +38,11 @@ public class PlayerSword : MonoBehaviour
         {
             // Deal damage to the Bringer of Death
             bringerofdeathController.TakeDamage(damageAmount);
+        }
+        if (wizardenemy != null)
+        {
+            // Deal damage to the Bringer of Death
+            wizardenemy.TakeDamage(damageAmount);
         }
     }
 }

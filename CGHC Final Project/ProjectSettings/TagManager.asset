@@ -10,6 +10,7 @@ TagManager:
   - Teleporter
   - Creature
   - BOD
+  - Wizard
   layers:
   - Default
   - TransparentFX

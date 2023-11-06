@@ -642,7 +642,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 544e683d2ae49c04fb7cf065f13432dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EricScene: EricScene
+  EricScene: MainMenuScene
 --- !u!1 &1110696045
 GameObject:
   m_ObjectHideFlags: 0

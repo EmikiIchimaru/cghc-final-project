@@ -29,7 +29,7 @@ public class DynamicEnemyCollider2D : MonoBehaviour
         bool isAttacking = GetComponent<Animator>().GetBool("Attack");
         bool isdeath = GetComponent<Animator>().GetBool("Die");
         bool ismove = GetComponent<Animator>().GetBool("Move");
-        bool istakehit = GetComponent<Animator>().GetBool("Hit");
+        bool istakehit = GetComponent<Animator>().GetBool("Takehit");
         bool isidle = GetComponent<Animator>().GetBool("Idle");
 
 

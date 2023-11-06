@@ -94,6 +94,7 @@ MonoBehaviour:
   creature: {fileID: 0}
   bringerofdeath: {fileID: 0}
   Wizard: {fileID: 0}
+  boss: {fileID: 0}
 --- !u!1 &8789868303103378129
 GameObject:
   m_ObjectHideFlags: 0
@@ -181,7 +182,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1654022033
   m_SortingLayer: 1
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: -1914236138, guid: a70b3fff8c0d54e41b799a19a9a33a3f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

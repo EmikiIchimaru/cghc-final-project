@@ -3,7 +3,7 @@ using UnityEngine.SceneManagement;
 
 public class NextScene : MonoBehaviour
 {
-    public string KenScene; // Assign the next scene's name in the Inspector
+    public string BenScene; // Assign the next scene's name in the Inspector
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -15,6 +15,6 @@ public class NextScene : MonoBehaviour
 
     public void LoadNextScene()
     {
-        SceneManager.LoadScene(KenScene);
+        SceneManager.LoadScene(BenScene);
     }
 }

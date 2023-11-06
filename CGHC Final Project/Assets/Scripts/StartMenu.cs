@@ -1,13 +1,20 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class StartMenu : MonoBehaviour
 {
-    public void StartGame()
+    public string StoryScene; // Assign the next scene's name in the Inspector
+
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        if (collision.CompareTag("Player")) // Replace "Player" with the tag of your teleporting object
+        {
+            LoadNextScene();
+        }
+    }
+
+    public void LoadNextScene()
+    {
+        SceneManager.LoadScene(StoryScene);
     }
 }
-

@@ -8,11 +8,12 @@ public class Button : MonoBehaviour
 
     //public ButtonType buttonType;
     public bool state;
-
     public Block[] blocks;
+    private AudioManager audio;
     void Awake()
     {
         ResetButton();
+        audio = AudioManager.Instance;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -42,6 +43,7 @@ public class Button : MonoBehaviour
                     break;
                 case Block.ButtonFunc.Toggle:
                     block.ToggleDoor();
+                    if (audio != null) {audio.Play("button");}
                     Debug.Log("tog");
                     break;
                 case Block.ButtonFunc.Summon:

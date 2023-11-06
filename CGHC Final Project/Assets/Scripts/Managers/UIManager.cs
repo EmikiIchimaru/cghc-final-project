@@ -37,6 +37,7 @@ public class UIManager : Singleton<UIManager>
     // Updates the jetpack fuel
     private void InternalJetpackUpdate()
     {
+        if (fuelImage == null) {return;}
         fuelImage.fillAmount =
             Mathf.Lerp(fuelImage.fillAmount, _currentJetpackFuel / _jetpackFuel, Time.deltaTime * 10f);
     }

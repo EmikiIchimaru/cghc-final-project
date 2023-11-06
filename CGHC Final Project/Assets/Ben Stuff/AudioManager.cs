@@ -22,7 +22,7 @@ public class AudioManager : MonoBehaviour
             Instance = this; 
         }
 
-        DontDestroyOnLoad(gameObject);
+        //DontDestroyOnLoad(gameObject);
 
         foreach (Sound s in sounds)
         {
@@ -42,6 +42,11 @@ public class AudioManager : MonoBehaviour
             return;
         }
         s.source.Play();
+    }
+
+    void Start()
+    {
+        Play("bgm");
     }
 
 }

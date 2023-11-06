@@ -28,6 +28,8 @@ public class CheckpointBen : MonoBehaviour
     {
         Debug.Log("checkpoint!");
 
+        AudioManager.Instance.Play("check");
+
         levelManager.levelStartPoint = spawnPoint;	
 
         if (checkpointActivatedEffect != null)

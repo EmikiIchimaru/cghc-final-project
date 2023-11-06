@@ -15,11 +15,14 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private GameObject playerPrefab;
     [SerializeField] private GameObject deathFX;
 
+    private AudioManager audio;
+
     private PlayerMotor _currentPlayer;
 
     private void Awake()
     {        
         SpawnPlayer(playerPrefab);
+        audio = AudioManager.Instance;
     }
 
     private void Update()
@@ -80,6 +83,10 @@ public class LevelManager : MonoBehaviour
         //_currentPlayer = player;
         _currentPlayer.gameObject.SetActive(false);
         GameObject dfx = Instantiate(deathFX, _currentPlayer.gameObject.transform.position, Quaternion.identity);
+        if (audio != null)
+        {
+            audio.Play("death");
+        }
         Destroy(dfx, 2f);
         Invoke("RevivePlayer",2f);
     }
